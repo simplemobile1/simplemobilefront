@@ -1,12 +1,12 @@
 export const prerender = false
-import { DOMAIN, HTTP_ENDPOINT, listOfPagesWithoutBackButton } from '$lib/config'
+import type { LayoutServerLoad } from './$types'
+import { DOMAIN, HTTP_ENDPOINT } from '$lib/config'
 import { error } from '@sveltejs/kit'
 
-export async function load({ url, request, locals, cookies, setHeaders }) {
+export const load: LayoutServerLoad = async ({ url, request, locals, cookies }) => {
 	try {
-		const currentPage = +url.searchParams.get('page') || 1
+		const currentPage = +(url.searchParams.get('page') || 1)
 		const q = url.searchParams.get('q') || ''
-		const d1 = new Date()
 		locals.url = url.href
 		locals.currentPage = currentPage
 		locals.q = q

@@ -1,9 +1,8 @@
 # What is Svelte Commerce?
 
-- Svelte Commerce is a storefront for your existing eCommerce.
-- It is possible to connect with any eCommerce backend
-- No need to make a big leap or invest huge amount. Just take this opend source project and attach to existing backend.
-- Advanced Frontend Platform for eCommerce based on Sveltekit
+- Svelte Commerce is a PWA storefront for your existing eCommerce based on Sveltekit.
+- It is possible to connect with any eCommerce backend that provides an API
+- We are working on adaptors of Medusajs, Shopify, Magento, Woocommerce, Litekart, Bigcommerce
 
 <a href="https://litekart.in/" aria-label="Click to browse litekart">
 <img src="https://repository-images.githubusercontent.com/213575283/f577b8bd-8edb-41ba-bfe5-36e65072e1f2" alt/>
@@ -22,7 +21,7 @@
 
 - Demo <a href="https://demo.litekart.in/" target="blank" rel="noopener noreferrer">demo.litekart.in</a>
 - Svelte commerce in home made FNB sector https://food.misiki.in/ (https://github.com/itswadesh/homefood)
-- Svelte commerce in jewellery industry https://next.varnijewels.com/
+- Svelte commerce in jewellery industry https://varnijewels.com/
 - Svelte commerce in fashion industry https://next.trialshot.com/
 - Svelte commerce in toys industry https://tablez.com/
 - Svelte commerce in mobile cover customization https://next.zapvi.in/
@@ -53,6 +52,8 @@
 
 ## Update 15-December-2022
 
+- 07-February-2023 - Prettified.
+- 06-February-2023 - Sveltekit 1.5
 - 15-December-2022 - Sveltekit 1.0 - Finally.
 - 05-December-2022 - fix: Close message
 - 30-November-2022 - Fixed: Coupon apply and remove, Added: Back to top fade animation

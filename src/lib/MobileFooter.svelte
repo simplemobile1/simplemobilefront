@@ -8,11 +8,11 @@
 }
 </style>
 
-<script>
+<script lang="ts">
 import { goto } from '$app/navigation'
 import { page } from '$app/stores'
 
-let selectedItem = {}
+let selectedItem:any = {}
 $: selectedItem.link = $page?.url.pathname
 
 let footerItems = [
@@ -70,7 +70,7 @@ let footerItems = [
 	}
 ]
 
-function handleClick(item) {
+function handleClick(item:any) {
 	goto(item.link)
 	selectedItem = item
 }
@@ -78,13 +78,15 @@ function handleClick(item) {
 
 <div
 	class="minimum-width-rem fixed inset-x-0 bottom-0 z-40 grid h-14 w-full grid-cols-5 items-center justify-items-center border-t bg-white"
-	style="box-shadow: 0px -4px 10px rgba(50, 50, 50, 0.2);">
+	style="box-shadow: 0px -4px 10px rgba(50, 50, 50, 0.2);"
+>
 	{#each footerItems as item}
 		<button
 			type="button"
 			class="col-span-1 flex flex-col items-center justify-center overflow-hidden focus:outline-none
             {selectedItem.link === item.link ? 'text-primary-500' : 'text-gray-700'}"
-			on:click="{() => handleClick(item)}">
+			on:click="{() => handleClick(item)}"
+		>
 			<div>
 				{#if selectedItem.link === item.link}
 					{@html item.activeIcon}
