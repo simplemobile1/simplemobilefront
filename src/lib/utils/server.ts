@@ -1,4 +1,5 @@
 import cookie from 'cookie'
+import datavi from './../data/store.json'
 import {
 	BIG_COMMERCE_BASE_URL,
 	HTTP_ENDPOINT,
@@ -88,6 +89,8 @@ export async function gett(endpoint: string, ck?: any) {
 	}
 }
 export const getBySid = async (endpoint: string, sid?: any) => {
+	console.log(endpoint,sid, "tyt")
+	if (!endpoint.startsWith("init")){
 	const response = await fetch(HTTP_ENDPOINT + '/api/' + endpoint, {
 		method: 'GET',
 		credentials: 'include',
@@ -100,8 +103,29 @@ export const getBySid = async (endpoint: string, sid?: any) => {
 	} else {
 		return res
 	}
+} else {
+	return datavi
 }
-
+}
+export const getByStrapi = async (endpoint: string, sid?: any) => {
+	console.log(endpoint,sid, "tyt")
+	if (!endpoint.startsWith("init")){
+	const response = await fetch(HTTP_ENDPOINT + '/api/' + endpoint, {
+		method: 'GET',
+		credentials: 'include',
+		headers: { cookie: `sid=${sid}` }
+	})
+	const isJson = response.headers.get('content-type')?.includes('application/json')
+	const res = isJson ? await response.json() : await response.text()
+	if (response?.status > 399) {
+		throw { status: response.status, message: response.statusText }
+	} else {
+		return res
+	}
+} else {
+	return datavi
+}
+}
 export const getMedusajsApi = async (endpoint: string, query: any, sid?: any) => {
 	// console.log('zzzzzzzzzzzzzzzzzzzz', MEDUSAJS_BASE_URL + '/' + endpoint + '?' + serialize(query))
 	const response = await fetch(MEDUSAJS_BASE_URL + '/' + endpoint + '?' + serialize(query))

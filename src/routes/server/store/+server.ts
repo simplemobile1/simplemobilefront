@@ -6,6 +6,7 @@ export async function GET({ request, cookies, locals }) {
 	const DOMAIN_NAME = DOMAIN || url.host
 	// console.log('iNIT dOMAIN.....', DOMAIN_NAME)
 	const storeRes = await getBySid(`init?domain=${DOMAIN_NAME}`)
+	console.log(storeRes)
 	const { storeOne, settings, popularSearches, megamenu } = storeRes
 	const store = {
 		id: storeOne._id,

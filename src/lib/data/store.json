@@ -1,0 +1,86 @@
+{
+  "storeOne": {
+    "_id": "6356502aca4ff28ed596cb1b",
+    "address": "rishon lezion",
+    "closed": false,
+    "dimentionUnit": "cm",
+    "isFnb": false,
+    "otpLogin": false,
+    "pageSize": 40,
+    "phone": "+97205",
+    "searchbarText": "Search for sim cards",
+    "websiteLegalName": "Simple Mobile",
+    "websiteName": "SimpleMobile",
+    "weightUnit": "kg",
+    "domain": "",
+    "closedMessage": "Sorry, we're updating the store",
+    "description": "description",
+    "websiteEmail": "xx@gmail.com",
+    "keywords": "online shopping, online shopping sites, simCard, sim, Online shopping site",
+    "title": "buy esim cards ",
+    "storeCurrency": {
+      "_id": "63608d2bff7820e5d37b039c",
+      "isoCode": "USD",
+      "symbol": "$",
+      "decimalDigits": 2
+    },
+    "logo": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869558/try3-1-removebg-preview_1_ftrpxg.png",
+    "videoUrl": "",
+    "adminUrl": "",
+    "currencyCode": "USD",
+    "currencySymbol": "$",
+    "id": "6356502aca4ff28ed596cb1b"
+  },
+  "settings": {
+    "_id": "634ae00e0b50cf544e3baa29",
+    "adminUrl": "",
+    "id": "634ae00e0b50cf544e3baa29"
+  },
+  "megamenu": [
+    {
+      "_id": "63b7ecb1975b3e01c25cb591",
+      "new": false,
+      "children": [],
+      "img": "https://s3.ap-south-1.amazonaws.com/litekart.in/stores/6356502aca4ff28ed596cb1b/category/6-4-v8lkzIczWp4v-9Pq4vzRz9V4L.png",
+      "name": "monthly esim",
+      "position": 0,
+      "link": "esimonth",
+      "slug": "monthly",
+      "imgCdn": "https://ik.imagekit.io/3wzatecz51w3i/litekart.in/stores/6356502aca4ff28ed596cb1b/category/6-4-v8lkzIczWp4v-9Pq4vzRz9V4L.png",
+      "id": "63b7ecb1975b3e01c25cb591"
+    },
+    {
+      "_id": "63b7ecc6975b3e01c25cb5ce",
+      "new": true,
+      "children": [],
+      "name": "travel esim",
+      "position": 0,
+      "link": "travel",
+      "slug": "travel",
+      "img": "https://s3.ap-south-1.amazonaws.com/litekart.in/stores/6356502aca4ff28ed596cb1b/category/7-4-rxgSl2HfvE6r-h4N1Z4c8f0JP.png",
+      "imgCdn": "https://ik.imagekit.io/3wzatecz51w3i/litekart.in/stores/6356502aca4ff28ed596cb1b/category/7-4-rxgSl2HfvE6r-h4N1Z4c8f0JP.png",
+      "id": "63b7ecc6975b3e01c25cb5ce"
+    },
+    {
+      "_id": "63b8f1fee497e2c0976880f5",
+      "new": false,
+      "children": [],
+      "name": "area esim",
+      "position": 0,
+      "link": "area",
+      "slug": "area",
+      "img": "https://s3.ap-south-1.amazonaws.com/litekart.in/stores/6356502aca4ff28ed596cb1b/category/3-7-ni9VOIWLqQMe-kfqykklvoeg0-Et8ElLlg5SCt.png",
+      "imgCdn": "https://ik.imagekit.io/3wzatecz51w3i/litekart.in/stores/6356502aca4ff28ed596cb1b/category/3-7-ni9VOIWLqQMe-kfqykklvoeg0-Et8ElLlg5SCt.png",
+      "id": "63b8f1fee497e2c0976880f5"
+    }
+  ],
+  "popularSearches": {
+    "data": [],
+    "count": 0,
+    "pageSize": 40,
+    "noOfPage": 1,
+    "page": null,
+    "active": 0,
+    "inactive": 0
+  }
+}

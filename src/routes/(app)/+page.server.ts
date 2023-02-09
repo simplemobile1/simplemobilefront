@@ -19,6 +19,7 @@ export async function load({ locals, setHeaders }) {
 		// setHeaders({ 'cache-control': 'max-age: 600' })
 		// redis.set(`home-www-${locals.store?.id}`, JSON.stringify(home), 'EX', 600)
 		// }
+		console.log(home,"home")
 		const deals = await fetchDeals({ storeId: store?.id, server: true })
 		if (home) {
 			return { home: home, deals: deals || {} }

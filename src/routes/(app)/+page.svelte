@@ -17,13 +17,12 @@ import SEO from '$lib/components/SEO/index.svelte'
 let today = dayjs(new Date()).toISOString()
 
 export let data
-
-// console.log('zzzzzzzzzzzzzzzzzz', data)
+ console.log('zllllzzzzzzzzzzzzzz', data)
 
 let seoProps = {
-	// addressCountry: 'India',
-	// addressLocality: 'Semiliguda, Koraput',
-	// addressRegion: 'Odisha',
+	// addressCountry: 'Israel',
+	// addressLocality: '',
+	// addressRegion: 'tel aviv',
 	// alternateJsonHref: '',
 	// alternateXml: { title: '', href: '' },
 	brand: $page.data.store?.title,

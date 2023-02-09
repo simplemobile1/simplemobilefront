@@ -11,7 +11,7 @@ export let heroBanners
 				href="{heroBanners[0]?.link || '##'}"
 				aria-label="Click here to view the banner's related products">
 				<LazyImg
-					src="{heroBanners[0]?.img}"
+					src="https://res.cloudinary.com/dudiwaoky/image/upload/v1675869855/ezgif.com-gif-maker_ryp6d1.gif"
 					alt=""
 					height="390"
 					aspect_ratio="2:1"
@@ -22,7 +22,7 @@ export let heroBanners
 				href="{heroBanners[1]?.link || '##'}"
 				aria-label="Click here to view the banner's related products">
 				<LazyImg
-					src="{heroBanners[1]?.img}"
+					src="https://res.cloudinary.com/dudiwaoky/image/upload/v1675869848/top-picture-projec-4-1700x500_vucphn.png"
 					alt=""
 					height="390"
 					aspect_ratio="2:1"

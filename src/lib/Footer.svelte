@@ -97,6 +97,7 @@ let footerItems = [
 
 onMount(async () => {
 	const res = await getStoreData()
+	console.log(res)
 	store = res.storeOne
 	megamenu = res.megamenu
 	popularSearches = res.popularSearches
