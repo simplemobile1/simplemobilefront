@@ -1,11 +1,11 @@
 import { error, type Handle } from '@sveltejs/kit'
-import { SECRET_SENTRY_DSN } from '$env/static/private'
-const SENTRY_DSN = SECRET_SENTRY_DSN
-import * as Sentry from '@sentry/svelte'
-import { BrowserTracing } from '@sentry/tracing'
+//import { SECRET_SENTRY_DSN } from '$env/static/private'
+//const SENTRY_DSN = SECRET_SENTRY_DSN
+//import * as Sentry from '@sentry/svelte'
+//import { BrowserTracing } from '@sentry/tracing'
 import { DOMAIN, HTTP_ENDPOINT, listOfPagesWithoutBackButton, WWW_URL } from '$lib/config'
 import { fetchStoreData, authenticateUser, fetchCart } from '$lib/server'
-
+/*
 if (SENTRY_DSN) {
 	Sentry.init({
 		dsn: SENTRY_DSN,
@@ -13,7 +13,7 @@ if (SENTRY_DSN) {
 		tracesSampleRate: 1.0
 	})
 }
-
+*/
 /** @type {import('@sveltejs/kit').HandleFetch} */
 export const handleFetch = async ({ event, request, fetch }) => {
 	request.headers.set('cookie', event.request.headers.get('cookie'))
