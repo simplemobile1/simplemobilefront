@@ -12,10 +12,10 @@ export const GOOGLE_ANALYTICS_ID = 'G-BG3JKWLYPF'
 export const GOOGLE_CLIENT_ID =
 	'414060469322-n4raqj2rdbjhegvrtdk6mhbdm4sd0oc7.apps.googleusercontent.com'
 export const instagramPage = 'https://www.instagram.com/misiki/'
-export const keywords = 'ecommerce, product'
+export const keywords = 'esim, product'
 export const linkedinPage = 'https://www.linkedin.com/company/misiki/'
 export const logo = Logo
-export const phone = '+91-8249028220'
+export const phone = '+972-502518300'
 export const pinterestPage = 'https://www.pinterest.com/company/misiki/'
 export const stripePublishableKey =
 	'pk_test_51HXxXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXq'

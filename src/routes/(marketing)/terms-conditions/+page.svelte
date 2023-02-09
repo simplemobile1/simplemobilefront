@@ -197,7 +197,7 @@ let seoProps = {
 
 				<p class="text-gray-500">
 					By visiting {$page.data.store?.websiteName}, you agree that the laws of the state of
-					GUJARAT, INDIA, without regard to principles of conflict of laws, will govern these
+					israel, without regard to principles of conflict of laws, will govern these
 					Conditions of Use and any dispute of any sort that might arise between you and {$page.data
 						.store.websiteName} or its associates.
 				</p>
@@ -213,7 +213,7 @@ let seoProps = {
 					India, except that, to the extent you have in any manner violated or threatened to violate
 					{$page.data.store?.websiteName}’s intellectual property rights, {$page.data.store
 						.websiteName} may seek injunctive or other appropriate relief in any state or federal court
-					in the state of Telangana, India, and you consent to exclusive jurisdiction and venue in such
+					in the state of Israel, and you consent to exclusive jurisdiction and venue in such
 					courts. Arbitration under this agreement shall be conducted under the rules then prevailing
 					of the American Arbitration Association. The arbitrators award shall be binding and may be
 					entered as a judgment in any court of competent jurisdiction. To the fullest extent permitted

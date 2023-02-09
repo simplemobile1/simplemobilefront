@@ -19,10 +19,9 @@ let seoProps = {
 		<h1 class="font-serif text-2xl font-medium md:text-3xl lg:text-4xl">About Us</h1>
 
 		<p class="text-gray-500">
-			{$page.data.store?.websiteName} is the best place to shop online in India. {$page.data.store
+			{$page.data.store?.websiteName} is the best place to shop esim in israel. {$page.data.store
 				.websiteName} is a well-established brand in the personalized gifts segment. Choose from a wide
-			range of mobile covers, t-shirts, photo mugs, key-chains, 3D-crystals, photo clocks, picture frames
-			and hundreds of other gifts.
+			range of esim packeges.
 		</p>
 
 		<p class="text-gray-500">
@@ -40,7 +39,7 @@ let seoProps = {
 					<h2 class="mb-1 text-xl font-semibold">{$page.data.store?.domain} is</h2>
 
 					<p class="text-gray-500">
-						Distinctive fashion for the contemporary Indian with In-house capabilities in design,
+						Distinctive fashion for the contemporary israels with In-house capabilities in design,
 						manufacturing, technology, data science, and marketing
 					</p>
 				</div>
@@ -89,7 +88,7 @@ let seoProps = {
 					<p class="text-gray-500">
 						We use advanced technologies to create products that are as durable as they are
 						delightful. We stand behindour products with customer service and support previously
-						unseen in India.
+						unseen in isreal.
 					</p>
 				</div>
 			</div>
