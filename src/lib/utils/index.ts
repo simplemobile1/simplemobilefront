@@ -1,10 +1,11 @@
 import { currency as currencyConfig, IMAGE_CDN_URL } from '../config'
 import { toasts } from 'svelte-toasts'
-import type { AllProducts, Product } from '$lib/types'
+import type { AllOrders, AllProducts, Order, Product } from '$lib/types'
+import type { ToastProps, ToastType } from 'svelte-toasts/types/common'
 
-let allToasts
+let allToasts: any
 
-export function constructURL2(url, fl) {
+export function constructURL2(url: string, fl: any) {
 	url += '?'
 	Object.keys(fl).forEach((e) => {
 		if (e == 'page') return
@@ -14,7 +15,7 @@ export function constructURL2(url, fl) {
 	return url
 }
 
-export const delay = (delayInms) => {
+export const delay = (delayInms: number) => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve(2)
@@ -22,7 +23,7 @@ export const delay = (delayInms) => {
 	})
 }
 
-export const getCdnImageUrl = (src) => {
+export const getCdnImageUrl = (src: string) => {
 	if (src) {
 		if (
 			src.includes('https://s3.ap-south-1.amazonaws.com/litekart.in/') ||
@@ -40,7 +41,7 @@ export const getCdnImageUrl = (src) => {
 	}
 }
 
-const toast = (title, type) => {
+const toast = (title: any, type: ToastType | undefined) => {
 	if (title?.message) title = title?.message
 	allToasts?.remove()
 	allToasts = toasts.add({
@@ -56,13 +57,13 @@ const toast = (title, type) => {
 	})
 }
 
-const removeToasts = (toast) => {
+const removeToasts = () => {
 	allToasts.remove()
 }
 
 export { toast, removeToasts }
 
-export function date(value) {
+export function date(value: string) {
 	const date = new Date(value)
 	return date.toLocaleString(['en-US'], {
 		month: 'short',
@@ -73,7 +74,7 @@ export function date(value) {
 	})
 }
 
-export function dateOnly(value) {
+export function dateOnly(value: string) {
 	const date = new Date(value)
 	return date.toLocaleString(['en-US'], {
 		month: 'short',
@@ -82,7 +83,7 @@ export function dateOnly(value) {
 	})
 }
 
-export function time(value) {
+export function time(value: string) {
 	const date = new Date(value)
 	return date.toLocaleString(['en-US'], {
 		hour: '2-digit',
@@ -90,12 +91,12 @@ export function time(value) {
 	})
 }
 
-export function truncate(text, stop, clamp) {
+export function truncate(text: string, stop: number, clamp: string) {
 	if (text) return text.slice(0, stop) + (stop < text.length ? clamp || '...' : '')
 	else return ''
 }
 
-export function currency(value, currency = '₹', decimals?) {
+export function currency(value: any, currency = '₹', decimals?: number) {
 	const digitsRE = /(\d{3})(?=\d)/g
 	value = parseFloat(value)
 	if (!isFinite(value) || (!value && value !== 0)) return ''
@@ -119,9 +120,9 @@ export const serialize = (obj: any) => {
 	return str.join('&')
 }
 
-export const mapBigcommerceProducts = (b) => {
+export const mapBigcommerceProducts = (b: any) => {
 	if (b) {
-		b.images = b.images.map((i) => i.url_standard)
+		b.images = b.images.map((i: any) => i.url_standard)
 		const prod: any = {
 			id: b.id,
 			name: b.name,
@@ -169,10 +170,11 @@ export const mapMedusajsAllProducts = (p: any) => {
 	if (p) {
 		const allProd: AllProducts = {
 			count: p.count,
-			// currentPage: p.count,
-			// pageSize: p.count,
+			// currentPage: p.currentPage,
+			// pageSize: p.pageSize,
 			limit: p.limit,
-			products: p.products.forEach(mapMedusajsProduct)
+			products: p.products.forEach(mapMedusajsProduct),
+			facets: p.facets
 		}
 		return allProd
 	} else {
@@ -184,6 +186,9 @@ export const mapMedusajsProduct = (p: any) => {
 	if (p) {
 		const prod: Product = {
 			_id: p.id,
+			// created_at: p.variants[0].created_at,
+			// updated_at: p.variants[0].updated_at,
+			// deleted_at: p.variants[0].deleted_at,
 			name: p.title,
 			slug: p.handle,
 			description: p.description,
@@ -192,12 +197,16 @@ export const mapMedusajsProduct = (p: any) => {
 				if (i) return i.url
 			}),
 			img: p.thumbnail,
+			// discountable: p.discountable,
+			// external_id: p.external_id,
 			// variants: p.variants,
 			sku: p.variants[0].sku,
 			barcode: p.variants[0].barcode,
 			ean: p.variants[0].ean,
+			// upc: p.variants[0].upc,
 			stock: p.variants[0].inventory_quantity,
 			// allow_backorder: p.variants[0].allow_backorder,
+			// manage_inventory: p.variants[0].manage_inventory,
 			hsn: p.variants[0].hs_code,
 			countryOfOrigin: p.variants[0].origin_country,
 			// mid_code: p.mid_code,
@@ -206,23 +215,23 @@ export const mapMedusajsProduct = (p: any) => {
 			height: p.variants[0].height,
 			width: p.variants[0].width,
 			length: p.variants[0].length,
+			price: p.variants[0].calculated_price_incl_tax,
+			mrp: p.variants[0].original_price_incl_tax,
+			discount:
+				100 *
+				((p.variants[0].original_price_incl_tax - p.variants[0].calculated_price_incl_tax) /
+					p.variants[0].original_price_incl_tax),
 			// options: p.variants[0].map((i: any) => {
 			// 	if (i)
 			// 		return {
-			// 			name: i.title
+			// 			name: i.value
 			// 		}
 			// }),
-			// created_at: p.variants[0].created_at,
-			// updated_at: p.variants[0].updated_at,
-			// deleted_at: p.variants[0].deleted_at,
 			// metaTitle: p.variants[0].metadata.title,
 			// metaDescription: p.variants[0].metadata.description,
 			// metaKeywords: p.variants[0].metadata.keywords,
 			// price_without_tax: p.variants[0].original_price,
 			// mrp_without_tax: p.variants[0].calculated_price,
-			price: p.variants[0].calculated_price_incl_tax,
-			mrp: p.variants[0].original_price_incl_tax,
-			discount: p.variants[0].prices[0].discount,
 			// original_tax: p.variants[0].prices[0].original_tax,
 			// calculated_tax: p.variants[0].prices[0].calculated_tax,
 			// tax_rates: p.variants[0].prices[0].tax_rates,
@@ -239,8 +248,6 @@ export const mapMedusajsProduct = (p: any) => {
 						name: i.value
 					}
 			})
-			// discountable: p.discountable,
-			// external_id: p.external_id,
 			// sales_channels: p.sales_channels,
 		}
 		return prod
@@ -249,7 +256,86 @@ export const mapMedusajsProduct = (p: any) => {
 	}
 }
 
-export const mapWoocommerceProducts = (p) => {
+export const mapMedusajsAllOrders = (p: any) => {
+	if (p) {
+		const allOrd: AllOrders = {
+			count: p.count,
+			// currentPage: p.currentPage,
+			// pageSize: p.pageSize,
+			limit: p.limit,
+			data: p.orders.forEach(mapMedusajsOrder)
+		}
+		return allOrd
+	} else {
+		return {}
+	}
+}
+
+export const mapMedusajsOrder = (o: any) => {
+	if (o) {
+		const ord: Order = {
+			_id: o.id,
+			status: o.status,
+			paymentStatus: o.payment_status,
+			cartId: o.cart_id,
+			cart: {},
+			customer: o.customer,
+			address: o.address,
+			// cart: o.cart,
+			// customer_id: o.customer_id,
+			// user: o.customer,
+			orderItems: [],
+			orderNo: '',
+			updatedAt: o.updated_at,
+			user: o.user,
+			userEmail: o.email,
+			billingAddress: o.billing_address.map((a: any) => {
+				if (a)
+					return {
+						address: a.address_1,
+						city: a.city,
+						country: a.country_code,
+						firstName: a.first_name,
+						lastName: a.last_name,
+						phone: a.phone,
+						state: a.province,
+						zip: a.postal_code
+					}
+			}),
+			paySuccess: o.paid_total,
+			totalAmountRefunded: o.refunded_total,
+			amount: {
+				currency: o.currency_code,
+				discount: 100 * ((o.total - o.discount_total) / o.total),
+				qty: o.items.length,
+				shipping: o.shipping_total,
+				subtotal: o.subtotal,
+				tax: o.tax_total,
+				total: o.total
+			},
+			items: o.items.map((i: any) => {
+				if (i)
+					return {
+						_id: i.id,
+						orderItemId: i.order_id,
+						description: i.description,
+						name: i.title,
+						img: i.thumbnail,
+						price: i.unit_price,
+						total: i.total,
+						subtotal: i.subtotal,
+						tax: i.tax_total,
+						qty: i.quantity
+					}
+			})
+		}
+		return ord
+	} else {
+		return {}
+	}
+}
+
+export const mapWoocommerceProducts = (p: any) => {
 	if (p) {
 		const prod: any = {
 			id: p.id,
@@ -287,7 +373,7 @@ export const mapWoocommerceProducts = (p) => {
 			related_products: p.related_ids,
 			stock_status: p.stock_status,
 			has_options: p.has_options,
-			images: p.images.map((i) => {
+			images: p.images.map((i: any) => {
 				if (i) return i.src
 			})
 		}
@@ -298,10 +384,10 @@ export const mapWoocommerceProducts = (p) => {
 	}
 }
 
-export const removeNullish = (obj) =>
-	Object.entries(obj).reduce((a, [k, v]) => (v ? ((a[k] = v), a) : a), {})
+export const removeNullish = (obj: any) =>
+	Object.entries(obj).reduce((a: any, [k, v]) => (v ? ((a[k] = v), a) : a), {})
 
-export const buildQueryFromObject = (search, prefix = '') =>
+export const buildQueryFromObject: any = (search: string, prefix = '') =>
 	Object.entries(search)
 		.map(([key, value]) =>
 			typeof value === 'object'

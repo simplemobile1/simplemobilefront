@@ -29,7 +29,8 @@ onMount(async () => {
 					alt="{deal.name}"
 					height="380"
 					width="380"
-					class="h-[380px] w-[380px] object-contain object-center text-xs" />
+					class="h-[380px] w-[380px] object-contain object-center text-xs"
+				/>
 			</div>
 		{/if}
 
@@ -41,12 +42,13 @@ onMount(async () => {
 					rewind: true,
 					perMove: 1,
 					keyboard: true,
-					gap: '3em',
+					gap: '12px',
 					pagination: false,
 					autoWidth: true,
 					width: innerWidth - 410,
 					height: '100%'
-				}}">
+				}}"
+			>
 				{#each deal.products as p, ix}
 					{#if p}
 						<SplideSlide>
@@ -65,7 +67,8 @@ onMount(async () => {
 					src="{deal.img}"
 					alt="{deal.name}"
 					height="380"
-					class="h-[380px] w-auto object-contain object-center text-xs" />
+					class="h-[380px] w-auto object-contain object-center text-xs"
+				/>
 			</div>
 		{/if}
 

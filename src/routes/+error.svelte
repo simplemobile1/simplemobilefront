@@ -9,7 +9,7 @@ h1 {
 }
 </style>
 
-<script>
+<script lang="ts">
 import { onMount } from 'svelte'
 import { page } from '$app/stores'
 import Footer from '$lib/Footer.svelte'
@@ -18,11 +18,12 @@ import Nav from '$lib/Nav.svelte'
 import PrimaryButton from '$lib/ui/PrimaryButton.svelte'
 // import { fetchCartData } from '$lib/services/CartService'
 import { fetchMeData } from '$lib/services/UserService'
+import type { Cart, Me } from '$lib/types'
 
 let openSidebar = false
 let showCartSidebar = false
-let me = []
-let cart = []
+let me:Me = {}
+let cart:Cart
 
 // onMount(async () => {
 // 	try {
@@ -39,7 +40,8 @@ let cart = []
 		me="{me}"
 		cart="{cart}"
 		bind:showCartSidebar="{showCartSidebar}"
-		bind:openSidebar="{openSidebar}" />
+		bind:openSidebar="{openSidebar}"
+	/>
 
 	<div class="flex h-screen flex-col items-center justify-center text-center">
 		{#if $page.error?.status === 404}
@@ -49,7 +51,8 @@ let cart = []
 						src="/error/404.svg"
 						alt=" "
 						width="240"
-						class="mb-5 h-auto w-60 object-contain" />
+						class="mb-5 h-auto w-60 object-contain"
+					/>
 				</div>
 
 				<div class="layout">
@@ -68,7 +71,8 @@ let cart = []
 							src="/error/404.svg"
 							alt=""
 							width="240"
-							class="mb-5 h-auto w-60 object-contain" />
+							class="mb-5 h-auto w-60 object-contain"
+						/>
 					</div>
 
 					<div class="text-center">
@@ -86,7 +90,8 @@ let cart = []
 							src="/error/404.svg"
 							alt=""
 							width="240"
-							class="mb-5 h-auto w-60 object-contain" />
+							class="mb-5 h-auto w-60 object-contain"
+						/>
 					</div>
 
 					<div class="flex flex-col gap-5 text-center">
@@ -104,7 +109,8 @@ let cart = []
 							src="/error/404.svg"
 							alt=""
 							width="240"
-							class="mb-5 h-auto w-60 object-contain" />
+							class="mb-5 h-auto w-60 object-contain"
+						/>
 					</div>
 
 					<div class="flex flex-col gap-5 text-center">
@@ -124,6 +130,6 @@ let cart = []
 	</div>
 
 	<div class="hidden sm:block">
-		<Footer me="{me}" />
+		<Footer me="{me}" popularSearches="{[]}" megamenu="{{}}" />
 	</div>
 </div>

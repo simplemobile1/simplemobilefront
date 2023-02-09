@@ -8,14 +8,14 @@ img.loaded {
 }
 </style>
 
-<script>
+<script lang="ts">
 import { getCdnImageUrl } from '$lib/utils'
 import { onMount } from 'svelte'
 
-export let noLazy = false // Dont add lazy to images that are on viewport
-export let clazz
-export let src
-export let alt
+// export let noLazy = false // Dont add lazy to images that are on viewport
+export let clazz:string
+export let src:string
+export let alt:string
 export let width = 'auto'
 export let height = 'auto'
 
@@ -23,7 +23,7 @@ const w = width === 'auto' ? 'auto' : +width * 2
 const h = height === 'auto' ? 'auto' : +height * 2
 
 let loaded = false
-let thisImage
+let thisImage:any
 
 onMount(() => {
 	thisImage.onload = () => {
@@ -40,6 +40,7 @@ onMount(() => {
 		? `${getCdnImageUrl(src)}?width=2&height=4`
 		: `${getCdnImageUrl(src)}?width=${w}&height=${h}`}"
 	alt="{alt}"
-	class:loaded
+	class:loaded="{loaded}"
 	class="{clazz} whitespace-pre-line"
-	bind:this="{thisImage}" />
+	bind:this="{thisImage}"
+/>
