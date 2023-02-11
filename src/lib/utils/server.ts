@@ -1,5 +1,6 @@
 import cookie from 'cookie'
 import datavi from './../data/store.json'
+import datame from './../data/home.json'
 import {
 	BIG_COMMERCE_BASE_URL,
 	HTTP_ENDPOINT,
@@ -72,6 +73,8 @@ export async function postBySid(endpoint: string, data: any, sid?: string) {
 	}
 }
 export async function gett(endpoint: string, ck?: any) {
+		console.log(endpoint ,"sidur",ck, "gett")
+
 	const ck1 = cookie.parse(ck || '')
 	const ep = HTTP_ENDPOINT + '/api/' + endpoint
 	const response = await fetch(ep, {
@@ -91,8 +94,12 @@ export async function gett(endpoint: string, ck?: any) {
 	}
 }
 export const getBySid = async (endpoint: string, sid?: any) => {
-	console.log(endpoint,sid, "tyt")
-	if (!endpoint.startsWith("init")){
+	console.log(endpoint ,"sidur",sid, "getBySid")
+	if (endpoint.startsWith("init")){
+			return datavi
+	}else if (endpoint.startsWith("home")){
+		return datame
+	}else{
 	const response = await fetch(HTTP_ENDPOINT + '/api/' + endpoint, {
 		method: 'GET',
 		credentials: 'include',
@@ -105,9 +112,7 @@ export const getBySid = async (endpoint: string, sid?: any) => {
 	} else {
 		return res
 	}
-} else {
-	return datavi
-}
+} 
 }
 export const getByStrapi = async (endpoint: string, sid?: any) => {
 	console.log(endpoint,sid, "tyt")

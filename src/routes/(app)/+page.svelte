@@ -1,4 +1,5 @@
 <script>
+import Tabs from '$lib/home/tabs.svelte'
 import { page } from '$app/stores'
 import CategoriesMobile from '$lib/home/CategoriesMobile.svelte'
 import dayjs from 'dayjs'
@@ -110,11 +111,7 @@ $: heroBanners =
 		<div class="mb-5 sm:mb-10">
 			<Hero banners="{data.home.banners?.data}" />
 		</div>
-
-		<h1 class="text-center text-2xl font-bold sm:text-3xl">
-			The High Performance and Scalable Ecommerce
-		</h1>
-
+		<Tabs/>
 		<!-- TOP CATEGORIES -->
 
 		{#if data.home?.categories?.data?.length > 0}
@@ -219,7 +216,7 @@ $: heroBanners =
 				</div>
 			{/if}
 		{/await}
-
+<!----
 		{#await data.deals}
 			<div class="flex w-[98vw] items-start justify-start gap-3 overflow-x-auto">
 				<div class="w-60 h-60 animate-pulse rounded-md bg-gray-300">
@@ -243,7 +240,7 @@ $: heroBanners =
 				{/each}
 			{/if}
 		{/await}
-
+				-->
 		<!-- POPULAR PRODUCTS -->
 
 		{#await data.home then home}

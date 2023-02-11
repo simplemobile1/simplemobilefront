@@ -20,9 +20,9 @@ export async function load({ locals, setHeaders }) {
 		// redis.set(`home-www-${locals.store?.id}`, JSON.stringify(home), 'EX', 600)
 		// }
 		console.log(home,"home")
-		const deals = await fetchDeals({ storeId: store?.id, server: true })
+		//const deals = await fetchDeals({ storeId: store?.id, server: true })
 		if (home) {
-			return { home: home, deals: deals || {} }
+			return { home: home || {} }//, deals: deals
 		}
 	} catch (e) {
 		throw error(

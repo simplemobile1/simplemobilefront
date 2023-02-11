@@ -57,11 +57,6 @@ onDestroy(() => {
 <img
 	alt="{alt}"
 	class="lazy {clazz}"
-	src="{`${getCdnImageUrl(src)}?tr=w-${aspect_ratio.split(':')[0]},h-${
-		aspect_ratio.split(':')[1]
-	},ar-${aspect_ratio.replace(':', '-')}`}"
-	data-src="{`${getCdnImageUrl(src)}?tr=w-${w},h-${h},ar-${aspect_ratio.replace(
-		':',
-		'-'
-	)},cm-pad_resize&sharpen=true`}"
+	src="{`${getCdnImageUrl(src)}`}"
+	data-src="{`${getCdnImageUrl(src)}`}"
 />
