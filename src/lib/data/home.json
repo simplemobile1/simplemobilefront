@@ -287,24 +287,6 @@
                     "link": "/search"
                 },
                 {
-                    "_id": "63b7d9a4975b3e01c25c983f",
-                    "img": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869848/top-picture-projec-4-1700x500_vucphn.png",
-                    "sort": 2,
-                    "type": "slider",
-                    "isMobile": false,
-                    "imgCdn": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869848/top-picture-projec-4-1700x500_vucphn.png",
-                    "link": "/search"
-                },
-                {
-                    "_id": "63b7e1ca975b3e01c25c9c75",
-                    "img": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869855/ezgif.com-gif-maker_ryp6d1.gif",
-                    "sort": 2,
-                    "type": "slider",
-                    "isMobile": true,
-                    "imgCdn": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869855/ezgif.com-gif-maker_ryp6d1.gif",
-                    "link": "/search"
-                },
-                {
                     "_id": "63b7f878975b3e01c25cbb70",
                     "img": "https://s3.ap-south-1.amazonaws.com/litekart.in/banner/2-4-XZWKsZvPxQCf.png",
                     "sort": 2,
@@ -314,20 +296,20 @@
                     "link": "/search"
                 },
                 {
-                    "_id": "63b7d99e975b3e01c25c982b",
-                    "img": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869855/ezgif.com-gif-maker_ryp6d1.gif",
-                    "sort": 3,
-                    "type": "slider",
-                    "isMobile": false,
-                    "imgCdn": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869855/ezgif.com-gif-maker_ryp6d1.gif",
-                    "link": "/search"
-                },
-                {
                     "_id": "63b7e1d4975b3e01c25c9c89",
                     "img": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869848/top-picture-projec-4-1700x500_vucphn.png",
                     "sort": 3,
                     "type": "slider",
                     "isMobile": true,
+                    "imgCdn": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869848/top-picture-projec-4-1700x500_vucphn.png",
+                    "link": "/search"
+                },
+                  {
+                    "_id": "63b7e1d4975b3e01c25c9c89",
+                    "img": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869848/top-picture-projec-4-1700x500_vucphn.png",
+                    "sort": 3,
+                    "type": "slider",
+                    "isMobile": false,
                     "imgCdn": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869848/top-picture-projec-4-1700x500_vucphn.png",
                     "link": "/search"
                 },

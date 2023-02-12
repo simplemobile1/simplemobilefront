@@ -112,7 +112,7 @@ $: heroBanners =
 			<Hero banners="{data.home.banners?.data}" />
 		</div>
 		<Tabs/>
-		<!-- TOP CATEGORIES -->
+		<!-- TOP CATEGORIES 
 
 		{#if data.home?.categories?.data?.length > 0}
 			<div class="mb-5 hidden sm:mb-10 sm:block">
@@ -166,8 +166,8 @@ $: heroBanners =
 				</div>
 			</div>
 		{/if}
-
-		<!-- HERO BANNERS -->
+-->
+		<!-- HERO BANNERS 
 
 		{#await data.home}
 			<div class="grid grid-cols-2 items-center gap-2 md:grid-cols-4">
@@ -194,8 +194,8 @@ $: heroBanners =
 				</div>
 			{/if}
 		{/await}
-
-		<!-- PICKED BANNERS -->
+-->
+		<!-- PICKED BANNERS 
 
 		{#await data.home}
 			<div class="grid grid-cols-2 items-center gap-2 md:grid-cols-4">
@@ -216,6 +216,7 @@ $: heroBanners =
 				</div>
 			{/if}
 		{/await}
+		-->
 <!----
 		{#await data.deals}
 			<div class="flex w-[98vw] items-start justify-start gap-3 overflow-x-auto">
@@ -241,7 +242,7 @@ $: heroBanners =
 			{/if}
 		{/await}
 				-->
-		<!-- POPULAR PRODUCTS -->
+		<!-- POPULAR PRODUCTS 
 
 		{#await data.home then home}
 			{#if home?.popular}
@@ -272,8 +273,8 @@ $: heroBanners =
 				{/if}
 			{/if}
 		{/await}
-
-		<!-- TRENDING PRODUCTS -->
+				-->
+		<!-- TRENDING PRODUCTS 
 
 		{#await data.home then home}
 			{#if home?.trending?.length > 0}
@@ -302,7 +303,7 @@ $: heroBanners =
 				</div>
 			{/if}
 		{/await}
-
+-->
 		<!-- <ProductTab /> -->
 	</div>
 
