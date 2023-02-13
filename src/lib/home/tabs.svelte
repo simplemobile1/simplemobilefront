@@ -1,5 +1,8 @@
 <script >
 let tab = 0
+import ChooseContrey from "$lib/components/simple/ChooseContrey.svelte";
+import ChooseGeo from "$lib/components/simple/ChooseGeo.svelte";
+import ChooseGlob from "$lib/components/simple/ChooseGlob.svelte";
 </script>
 
 
@@ -93,15 +96,15 @@ let tab = 0
 {#if tab == 1}
   <div class="tab-pane fade show active" id="tabs-homeJustify" role="tabpanel"
     aria-labelledby="tabs-home-tabJustify">
-    Tab 1 content justify
+    <ChooseContrey/>
   </div>
 {:else if tab == 2}  
   <div class="tab-pane fade" id="tabs-profileJustify" role="tabpanel" aria-labelledby="tabs-profile-tabJustify">
-    Tab 2 content justify
-  </div>
+<ChooseGeo/>    
+</div>
 {:else if tab == 3}  
   <div class="tab-pane fade" id="tabs-messagesJustify" role="tabpanel" aria-labelledby="tabs-profile-tabJustify">
-    Tab 3 content justify
+    <ChooseGlob/>
   </div>
 {/if}  
 </div>
