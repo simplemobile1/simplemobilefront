@@ -2248,13 +2248,7 @@
     "iso": true,
     "name": "United States of America"
   },
-  {
-    "code": "xx",
-    "flag_1x1": "flags/1x1/xx.svg",
-    "flag_4x3": "flags/4x3/xx.svg",
-    "iso": false,
-    "name": "Unknown"
-  },
+    
   {
     "capital": "Montevideo",
     "code": "uy",
