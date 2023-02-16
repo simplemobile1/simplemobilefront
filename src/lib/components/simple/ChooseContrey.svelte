@@ -7,6 +7,7 @@ let list = country
 let matchingOptions = []
   let selected = []
   let open = false
+  let placeholder = "search for country"
   let searchText = ``
     function contrey (uu){
         console.log(uu)
@@ -24,6 +25,7 @@ let matchingOptions = []
 <div class="w-full  p-4 bg-white   sm:p-6">
     <MultiSelect 
     bind:selected 
+    {placeholder}
     options={ops} 
     bind:matchingOptions 
     maxSelect={1}
