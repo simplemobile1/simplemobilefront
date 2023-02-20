@@ -10,7 +10,7 @@ let matchingOptions = []
   let selected = []
   let open = false
   let code = ""
-  let placeholder = "search for country"
+  let placeholder = "search for a region"
   let searchText = ``
   let choosed = false
     function contrey (uu){
