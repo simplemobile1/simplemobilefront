@@ -137,8 +137,7 @@ export const fetchProduct = async ({ origin, slug, id, server = false, sid = nul
 				res = mapWoocommerceProducts(wo)
 				break
 			case 'litekart':
-								console.log("pt:",id)
-				const st = (await getStrapi(`/products/${id}?populate=*`)).data
+				const st = (await getStrapi(`/products/${slug}?populate=*`)).data
 				console.log("pt:",st)
 				res = mapStrapi(st)
 		}

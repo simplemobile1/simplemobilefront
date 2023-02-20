@@ -6,7 +6,7 @@ import ProductCard from '$lib/ProductCard.svelte'
 import DummyProductCard from '$lib/DummyProductCard.svelte'
 import { fetchProducts } from '$lib/services/ProductService'
 import pr from '$lib/data/prod.json'
-
+export let kind = ""
 
 export let code = 'IL'
 let loading = false
@@ -28,7 +28,12 @@ onMount(async () => {
 
 function filterProducts(selectedCategory:string) {
 	products = products.data?.filter((p) => {
+		if(kind != "geo"){
 		 return p.attributes?.country === selectedCategory.toUpperCase()
+		}else{
+		 return p.attributes?.category?.data.attributes?.name === selectedCategory
+		}
+
 	})
 
 	 console.log('products', products)

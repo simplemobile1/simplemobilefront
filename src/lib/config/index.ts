@@ -10,15 +10,15 @@ export const authorInfo = {
 	telegramUsername: 'itswadesh',
 	twitterUsername: 'itswadesh'
 }
-export const currency = { symbol: '₹', code: 'INR' }
-export const adminUrl = 'https://admin.litekart.in'
+export const currency = { symbol: '₪', code: 'ILS' }
+export const adminUrl = 'https://strapi-57j3.onrender.com/admin'
 export const dimentionUnit = 'cm'
 export const loginUrl = '/auth/login'
 export const weightUnit = 'g'
-export const currencyCode = 'USD'
-export const currencySymbol = '$'
+export const currencyCode = 'ILS'
+export const currencySymbol = '₪'
 export const DOMAIN = env.PUBLIC_DOMAIN
-export const entity = 'Misiki'
+export const entity = 'SimpleMobile'
 export const HTTP_ST_ENDPOINT = "https://strapi-57j3.onrender.com/api"
 export const HTTP_ENDPOINT = env.PUBLIC_HTTP_ENDPOINT || 'https://api.litekart.in'
 export const IMAGE_CDN_URL = 'https://ik.imagekit.io/3wzatecz51w3i'
