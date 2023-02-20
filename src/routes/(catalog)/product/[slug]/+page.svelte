@@ -318,22 +318,27 @@ function handleMobileCanvas() {
 					<div
 						class="flex w-full grid-cols-2 flex-row gap-2 overflow-x-scroll scrollbar-none md:grid"
 					>
-						{#if data?.product?.images?.length}
-							{#each data.product?.images as img, index}
+						{#if data?.product?.img}
+						<button 
+							class="flex h-auto w-full flex-shrink-0 cursor-zoom-in items-center justify-center overflow-hidden rounded md:flex-shrink"
+									on:click="{() => handleGallery(0)}"							
+							>
+						<!----	{#each data.product?.images as img, index}
 								<button
 									type="button"
 									class="flex h-auto w-full flex-shrink-0 cursor-zoom-in items-center justify-center overflow-hidden rounded md:flex-shrink"
 									on:click="{() => handleGallery(index)}"
-								>
+								>-->
 									<LazyImg
-										src="{img}"
+										src="{data?.product?.img}"
 										alt="{data.product?.name}"
-										width="360"
-										height="480"
-										class="h-[480px] w-[360px] object-contain object-center text-xs"
+										width="200"
+										height="128"
+										class="h-[128px] w-[200px] object-contain object-center text-xs"
 									/>
-								</button>
-							{/each}
+							<!--	</button>
+							{/each}-->
+							</button>
 						{/if}
 					</div>
 				{:else if data.product?.layoutTemplateCdn}

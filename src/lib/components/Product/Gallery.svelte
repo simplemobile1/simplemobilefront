@@ -24,6 +24,7 @@ $: if (product?.images) {
 
 let Carousel, Splide:any
 onMount(async () => {
+	console.log(product)
 	// const RTEmodule = await import('$lib/components/TwECarousel.svelte')
 	// Carousel = RTEmodule.default
 	const SplideModule = await import('$lib/components/SplideJs.svelte')
@@ -102,20 +103,15 @@ onMount(async () => {
 						{/if}
 					{/each}
 				</svelte:component> -->
-			{:else if product?.images?.length === 1}
+			{:else}
 				<div data-sveltekit-preload-data class="max-h-screen w-full">
 					<img
-						src="{product?.images && product?.images[0]}"
+						src="{product?.img}"
 						alt=""
 						class="block h-full object-contain"
 					/>
 				</div>
-			{:else}
-				<div
-					class="flex max-h-screen w-full items-center justify-center text-center text-sm text-white"
-				>
-					Oops! No Image found
-				</div>
+			
 			{/if}
 		</div>
 
@@ -132,7 +128,7 @@ onMount(async () => {
 				</div>
 			{/if}
 
-			{#if product?.images?.length}
+			{#if product?.img}
 				<div class="w-full flex-1 bg-white py-5 md:max-w-lg lg:h-full">
 					<div class="mb-2 px-5">
 						<h2 class="mb-1 font-bold sm:text-lg">Photos for {product?.name}</h2>
@@ -143,27 +139,27 @@ onMount(async () => {
 					<div
 						class="grid grid-cols-3 gap-2 overflow-y-auto px-5 overflow-x-hidden scrollbar-thin scrollbar-thumb-slate-300 lg:max-h-[70vh] lg:grid-cols-2"
 					>
-						{#each product?.images as img}
+					<!--	{#each product?.images as img}
 							{#if img}
 								<button
 									type="button"
 									class="relative z-0 col-span-1 border bg-gray-100 focus:outline-none"
 									on:click="{() => (selectedimg = img)}"
-								>
+								>-->
 									<LazyImg
-										src="{img}"
+										src="{product?.img}"
 										alt=""
 										height="240"
 										class="h-40 w-40 rounded-md object-contain object-center"
 									/>
 
-									<div
+								<!--	<div
 										class="absolute inset-0 z-10 h-full w-full bg-white  
                                     {selectedimg === img ? 'bg-opacity-0' : 'bg-opacity-50'}"
 									></div>
 								</button>
 							{/if}
-						{/each}
+						{/each}-->
 					</div>
 				</div>
 			{/if}

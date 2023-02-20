@@ -1,7 +1,7 @@
 import cookie from 'cookie'
 import datavi from './../data/store.json'
 import {
-	HTTP_ENDPOINT,
+	HTTP_ST_ENDPOINT,
 	provider,
 	
 } from '../config'
@@ -9,7 +9,11 @@ import {
 
 //import { serialize } from '.'
 
-
+export function mapStrapi (dat){
+let res = dat.attributes
+res.id = dat.id
+return res
+} 
 
 export async function posttStrapi(endpoint: string, data: any, ck?: any) {
 	const ep = HTTP_ENDPOINT + '/api/' + endpoint
@@ -63,10 +67,10 @@ export async function postStrapi(endpoint: string, data: any, sid?: string) {
 }
 export async function getStrapi(endpoint: string, ck?: any) {
 	const ck1 = cookie.parse(ck || '')
-	const ep = HTTP_ENDPOINT + '/api/' + endpoint
+	const ep = HTTP_ST_ENDPOINT + endpoint
 	const response = await fetch(ep, {
 		method: 'GET',
-		credentials: 'include',
+		//credentials: 'include',
 		headers: { cookie: `sid=${ck1.sid}` }
 	})
 	const isJson = response.headers.get('content-type')?.includes('application/json')

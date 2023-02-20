@@ -1,5 +1,7 @@
 import { error } from '@sveltejs/kit'
 import { getAPI } from '$lib/utils/api'
+import { getStrapi } from '$lib/utils/strapi'
+import { mapStrapi } from '$lib/utils/strapi'
 import {
 	getBigCommerceApi,
 	getBySid,
@@ -109,16 +111,17 @@ export const fetchProducts = async ({ origin, slug, id, server = false, sid = nu
 // Fetch single product
 
 export const fetchProduct = async ({ origin, slug, id, server = false, sid = null }: any) => {
+	console.log(id)
 	try {
 		let res: Product | {} = {}
 		switch (provider) {
-			case 'litekart':
+			/*case 'litekart':
 				if (server) {
 					res = await getBySid(`products/${slug}`, sid)
 				} else {
 					res = await getAPI(`products/${slug}`, origin)
 				}
-				break
+				break*/
 			case 'medusajs':
 				const med = (await getMedusajsApi(`products/${id}`, {}, sid)).product
 				res = mapMedusajsProduct(med)
@@ -133,6 +136,11 @@ export const fetchProduct = async ({ origin, slug, id, server = false, sid = nul
 				const wo = (await getWooCommerceApi(`products/${id}`, {}, sid)).data
 				res = mapWoocommerceProducts(wo)
 				break
+			case 'litekart':
+								console.log("pt:",id)
+				const st = (await getStrapi(`/products/${id}?populate=*`)).data
+				console.log("pt:",st)
+				res = mapStrapi(st)
 		}
 		return res || {}
 	} catch (e) {

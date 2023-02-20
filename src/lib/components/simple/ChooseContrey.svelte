@@ -1,16 +1,22 @@
 <script>
     import country from '$lib/country.json'
     import {countries} from '$lib/components/Autocomplete/countriesData.js'
-     import MultiSelect from 'svelte-multiselect'
+     import MultiSelect from 'svelte-multiselect';
+    // import Prodgl from './prodgl.svelte'
+    import Prodtab from '$lib/components/Product/ProductTab.svelte'
 let list = country
   const ops = countries
 let matchingOptions = []
   let selected = []
   let open = false
+  let code = ""
   let placeholder = "search for country"
   let searchText = ``
+  let choosed = false
     function contrey (uu){
         console.log(uu)
+        code = uu
+        choosed = true
     }
     $:if (searchText.length > 0){
         open = false
@@ -22,6 +28,7 @@ let matchingOptions = []
     )
     }
 </script>
+{#if choosed == false}
 <div class="w-full  p-4 bg-white   sm:p-6">
     <MultiSelect 
     bind:selected 
@@ -44,4 +51,8 @@ let matchingOptions = []
     {/each}
         </ul>
         </div>
+{:else}
+<button>close</button>
+<Prodtab {code}/>        
+{/if}
   

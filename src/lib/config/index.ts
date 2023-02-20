@@ -19,6 +19,7 @@ export const currencyCode = 'USD'
 export const currencySymbol = '$'
 export const DOMAIN = env.PUBLIC_DOMAIN
 export const entity = 'Misiki'
+export const HTTP_ST_ENDPOINT = "https://strapi-57j3.onrender.com/api"
 export const HTTP_ENDPOINT = env.PUBLIC_HTTP_ENDPOINT || 'https://api.litekart.in'
 export const IMAGE_CDN_URL = 'https://ik.imagekit.io/3wzatecz51w3i'
 export const mediaqueries = {

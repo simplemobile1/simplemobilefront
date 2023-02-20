@@ -39,7 +39,7 @@ import productVeg from '$lib/assets/product/veg.png'
 import type { Product } from './types'
 
 export let product:Product
-
+export let iid:Number
 let images = [
 	'https://s3.ap-south-1.amazonaws.com/litekart.in/stores/6356502aca4ff28ed596cb1b/product/6045f9ae120e71405f1767d3/fancy-0235-888-fancymart-original-imafhez6qfja6jza-vjkatenzjzyw.jpeg',
 	'https://s3.ap-south-1.amazonaws.com/litekart.in/stores/6356502aca4ff28ed596cb1b/product/6045f9ae120e71405f1767d3/ohdbaf-1287-decorebugs-original-imaem5qy9pus7vfk-beflo8mcngxe.jpeg',
@@ -80,7 +80,7 @@ function selectPrimaryImage() {
 	on:mouseleave="{hideitems}"
 >
 	<a
-		href="/product/{product.slug}?id={product.id}"
+		href="/product/{product.slug}?id={iid}"
 		target="{$page?.data?.isDesktop ? '_blank' : ''}"
 		rel="noopener noreferrer"
 		aria-label="Click to view the product details"
@@ -98,7 +98,7 @@ function selectPrimaryImage() {
 					</div>
 				{/if}
 
-				{#if product.tags?.length}
+			<!--	{#if product.tags?.length}
 					{#each product.tags as tag}
 						{#if tag?.name && tag?.type === 'Ribbon'}
 							<div
@@ -109,7 +109,7 @@ function selectPrimaryImage() {
 							</div>
 						{/if}
 					{/each}
-				{/if}
+				{/if}-->
 			</div>
 		{/if}
 
@@ -120,8 +120,8 @@ function selectPrimaryImage() {
 			src="{product.img||''}"
 			alt="{product.name}"
 			width="210"
-			height="280"
-			class="h-[280px] w-[210px] object-contain object-bottom text-xs"
+			height="100"
+			class="h-[100px] w-[210px] object-contain object-bottom text-xs"
 		/>
 		<!-- </button> -->
 	</a>
@@ -336,15 +336,7 @@ function selectPrimaryImage() {
 						{product.name || '_'}
 					</h2>
 
-					{#if $page?.data?.store?.isFnb && product.foodType}
-						<div>
-							{#if product.foodType === 'veg'}
-								<img src="{productVeg}" alt="veg" class="h-5 w-5" />
-							{:else if product.foodType === 'nonveg'}
-								<img src="{productNonVeg}" alt="non veg" class="h-5 w-5" />
-							{/if}
-						</div>
-					{/if}
+				
 				</div>
 			</a>
 		</div>
