@@ -180,21 +180,36 @@ onMount(async () => {
 			storeId: $page?.data?.store?.id
 		})
 
-		productReview = await fetchProductReviews({
-			pid: data.product._id,
-			origin: $page?.data?.origin,
-			storeId: $page?.data?.store?.id
-		})
-
-		relatedProducts = await fetchRelatedProducts({
+		/*relatedProducts = await fetchRelatedProducts({
 			pid: data.product._id,
 			categorySlug: data.product.category?.slug,
 			origin: $page?.data?.origin,
 			storeId: $page?.data?.store?.id
-		})
+		})*/
+
 	} catch (e) {
 	} finally {
 	}
+	data.product.specifications = [{
+		"name": "Data",
+		"value": `${data.product.data} GB` 
+	},{
+		"name": "Valid for",
+		"value":data.product.goodFor
+	}]
+	if(data.product.calls > 0){
+		data.product.specifications.push({
+		"name": "Calls",
+		"value": `${data.product.calls} Minutes` 
+	})
+	}
+	if(data.product.sms > 0){
+		data.product.specifications.push({
+		"name": "SMS",
+		"value": `${data.product.sms} SMS` 
+	})
+	}
+	data = data
 })
 
 function handleShowReviewsCount(showReviewsCount) {
@@ -842,16 +857,10 @@ function handleMobileCanvas() {
 
 						<ul class="grid grid-cols-1 border-8 lg:grid-cols-2">
 							{#each data.product?.specifications as s}
-								<li class="flex items-center gap-3 border p-3">
-									<h6 class="w-24 font-medium sm:w-44">
-										{s.name}
+								<li class="flex items-center  border p-3">
+									<h6 class=" font-medium sm:w-44">
+										{s.name} : {s.value}
 									</h6>
-
-									:
-
-									<p class="flex-1">
-										{s.value}
-									</p>
 								</li>
 							{/each}
 						</ul>
@@ -863,7 +872,7 @@ function handleMobileCanvas() {
 				{#if data.product?.descrip}
 					<div class="mb-5">
 						<h6 class="mb-2 flex items-center gap-2 font-semibold uppercase">
-							<span> Product Details </span>
+							<span> Details </span>
 
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
