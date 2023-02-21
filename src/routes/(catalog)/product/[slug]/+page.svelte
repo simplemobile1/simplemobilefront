@@ -79,6 +79,7 @@ import Textarea from '$lib/ui/Textarea.svelte'
 import Textbox from '$lib/ui/Textbox.svelte'
 import viewport from '$lib/actions/useViewPort'
 import WhiteButton from '$lib/ui/WhiteButton.svelte'
+import Product from '$lib/components/SEO/Product.svelte'
 
 export let data
 
@@ -301,7 +302,8 @@ function handleMobileCanvas() {
 			<!-- Breadcrumb -->
 
 			<Breadcrumb
-				categoryPool="{data.product?.categoryPool}"
+				categoryPool="{new Array({"name": data.product?.main.data.attributes.name,"slug":data.product?.main.data.id},
+											{"name": data.product?.category.data.attributes.name,"slug":data.product?.category.data.id})}"
 				currentProductName="{data.product?.name}"
 			/>
 
@@ -310,11 +312,10 @@ function handleMobileCanvas() {
 			<SocialSharingButtons product="{data.product}" />
 		</div>
 
-		<div class="mb-5 grid grid-cols-1 items-start gap-5 sm:mb-10 sm:gap-10 lg:grid-cols-5">
+		<div class="mb-5 grid grid-cols-1 items-start gap-5 sm:mb-10 sm:gap-10 lg:grid-cols-3">
 			<!-- Images -->
 
-			<div class="col-span-1 h-auto lg:col-span-3">
-				{#if !data.product?.isCustomized}
+			<div class="col-span-1 h-auto lg:col-span-1">
 					<div
 						class="flex w-full grid-cols-2 flex-row gap-2 overflow-x-scroll scrollbar-none md:grid"
 					>
@@ -332,81 +333,20 @@ function handleMobileCanvas() {
 									<LazyImg
 										src="{data?.product?.img}"
 										alt="{data.product?.name}"
-										width="200"
-										height="128"
-										class="h-[128px] w-[200px] object-contain object-center text-xs"
+										width="250"
+										height="148"
+										class="h-[148px] w-[250px] object-contain object-center text-xs"
 									/>
 							<!--	</button>
 							{/each}-->
 							</button>
 						{/if}
 					</div>
-				{:else if data.product?.layoutTemplateCdn}
-					<div
-						transition:fade="{{ duration: 200 }}"
-						class="{showEditor
-							? 'fixed inset-0 top-0 z-[100] h-[90vh] w-full bg-white sm:static sm:z-0 sm:h-auto sm:bg-transparent'
-							: ''}"
-					>
-						{#if showEditor}
-							<button
-								type="button"
-								class="absolute top-3 right-3 z-[70] text-white"
-								on:click="{() => (showEditor = false)}"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke-width="1.5"
-									stroke="currentColor"
-									class="h-6 w-6"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-								</svg>
-							</button>
-						{/if}
-					</div>
-				{:else}
-					<div
-						class="flex h-screen w-full flex-col items-center justify-center gap-5 text-center sm:mx-auto sm:h-auto sm:w-auto"
-					>
-						<h2 class="text-xl font-semibold capitalize sm:text-2xl">Make your custom design</h2>
 
-						<div
-							class="relative flex h-full w-full flex-col items-center justify-center gap-2 rounded-md border bg-gray-100 text-sm text-gray-500 sm:h-[570px] sm:w-[302px]"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								class="h-10 w-10"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"
-								></path>
-							</svg>
-
-							<span> Opps! layout template not found </span>
-						</div>
-					</div>
-				{/if}
 			</div>
 
 			<div class="col-span-1 px-4 sm:px-10 md:px-0 lg:col-span-2">
-				<!-- Brand -->
-
-				{#if data.product?.brand?.name}
-					<h2 class="mb-1 text-xl sm:text-2xl"><b>{data.product?.brand?.name}</b></h2>
-				{/if}
-
+			
 				<!-- Name -->
 
 				{#if data.product?.name}
@@ -414,16 +354,6 @@ function handleMobileCanvas() {
 						<h2 class="flex-1 text-gray-500 sm:text-lg">
 							{data.product?.name}
 						</h2>
-
-						{#if $page?.data?.store?.isFnb && data.product.foodType}
-							<div>
-								{#if data.product.foodType === 'veg'}
-									<img src="{productVeg}" alt="veg" class="h-5 w-5" />
-								{:else if data.product.foodType === 'nonveg' || data.product.foodType === 'E'}
-									<img src="{productNonVeg}" alt="non veg" class="h-5 w-5" />
-								{/if}
-							</div>
-						{/if}
 					</div>
 				{/if}
 
@@ -453,38 +383,9 @@ function handleMobileCanvas() {
 					<p class="text-sm font-semibold text-green-700">Inclusive of all taxes</p>
 				</div>
 
-				<!-- ratings -->
-
-				{#if productReview?.summary?.avg > 0}
-					<button
-						type="button"
-						class="mt-2 flex max-w-max items-center divide-x-2 divide-gray-300 border border-gray-300 py-1 text-sm focus:outline-none"
-						on:click="{() => scrollTo('ratings-and-reviews')}"
-					>
-						<div class="flex items-center gap-1 px-2 font-semibold">
-							<span> {productReview?.summary?.avg} </span>
-
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="h-4 w-4 text-primary-500"
-								viewBox="0 0 20 20"
-								fill="currentColor"
-							>
-								<path
-									d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-								>
-								</path>
-							</svg>
-						</div>
-
-						<span class="px-2 text-gray-500"> {productReview?.summary?.count} Ratings </span>
-					</button>
-				{/if}
-
-				<hr class="my-5 block w-full border-t border-gray-300 sm:hidden lg:block" />
-
+				
 				<!-- Delivery Options Mobile -->
-
+				{#if data.product.main.data.attributes.name != "ESIM"}
 				<div class="mb-5 block sm:hidden">
 					<h6 class="mb-2 flex items-center gap-2 font-semibold uppercase">
 						<span> Delivery Options </span>
@@ -507,7 +408,7 @@ function handleMobileCanvas() {
 
 					<DeliveryOptions product="{data.product}" deliveryDetails="{data.deliveryDetails}" />
 				</div>
-
+				{/if}
 				<!-- prices desktop -->
 
 				<div class="hidden sm:block">
@@ -959,7 +860,7 @@ function handleMobileCanvas() {
 
 				<!-- Product Details -->
 
-				{#if data.product?.description}
+				{#if data.product?.descrip}
 					<div class="mb-5">
 						<h6 class="mb-2 flex items-center gap-2 font-semibold uppercase">
 							<span> Product Details </span>
@@ -981,7 +882,7 @@ function handleMobileCanvas() {
 						</h6>
 
 						<div class="prose max-w-none text-justify text-sm">
-							{@html data.product?.description}
+							{@html data.product?.descrip}
 						</div>
 					</div>
 				{/if}
@@ -1057,7 +958,7 @@ function handleMobileCanvas() {
 				<hr class="mb-5 hidden w-full border-t border-gray-300 sm:block" />
 
 				<!-- Delivery Options Desktop -->
-
+				{#if data.product.main.data.attributes.name != "ESIM"}
 				<div class="mb-5 hidden sm:block">
 					<h6 class="mb-2 flex items-center gap-2 font-semibold uppercase">
 						<span> Delivery Options </span>
@@ -1082,185 +983,9 @@ function handleMobileCanvas() {
 				</div>
 
 				<hr class="mb-5 w-full border-t border-gray-300" />
-
-				<!-- Ratings & Reviews -->
-
-				<div id="ratings-and-reviews" class="mb-5">
-					<h6 class="mb-2 flex items-center gap-2 font-semibold uppercase">
-						<span> Ratings </span>
-
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-5 w-5"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="1"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-							></path>
-						</svg>
-					</h6>
-
-					{#if productReview?.summary?.avg > 0 && productReview?.ratings?.length}
-						<div class="mb-5">
-							<div class="tems-center flex">
-								<div
-									class="flex max-w-max flex-col items-center justify-center border-r border-gray-300 px-4 text-center"
-								>
-									<h2 class="mb-2 flex items-end gap-2">
-										<span class="text-4xl sm:text-5xl"> {productReview?.summary?.avg} </span>
-
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											class="h-6 w-6 text-primary-500"
-											viewBox="0 0 20 20"
-											fill="currentColor"
-										>
-											<path
-												d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-											></path>
-										</svg>
-									</h2>
-
-									<p class="text-sm">{productReview?.summary?.count} Verified Buyers</p>
-								</div>
-
-								<div class="flex w-full max-w-xs flex-1 flex-col-reverse px-4">
-									{#each productReview?.ratings as r}
-										<div class="mb-2 flex items-center justify-center gap-2 text-xs leading-3">
-											<div class="flex w-8 items-center gap-1">
-												<span class="font-bold">{r._id}</span>
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													class="h-4 w-4 text-gray-300"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-													<path
-														d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-													></path>
-												</svg>
-											</div>
-
-											<div class="relative h-1 w-full rounded-full bg-gray-300">
-												<div
-													class="absolute inset-y-0 left-0 rounded-full bg-green-500"
-													style="width: {r.percent}%"
-												></div>
-											</div>
-
-											<span class="w-8 text-right text-gray-500">
-												{r.count}
-											</span>
-										</div>
-									{/each}
-								</div>
-							</div>
-						</div>
-
-						<hr class="mb-5 w-full border-t border-gray-300" />
-
-						{#if productReview?.data?.count > 0}
-							<div class="mb-5">
-								<h2 class="mb-5 font-semibold">Customer Reviews ({productReview?.data?.count})</h2>
-
-								{#each productReview?.data?.data as review, rx}
-									{#if rx + 1 <= showReviewsCount}
-										<div class="mb-5 flex items-start gap-4">
-											<div
-												class="flex max-w-max items-center gap-0.5 rounded bg-primary-500 px-1.5 py-0.5 text-xs font-semibold text-white"
-											>
-												<span>
-													{review.rating}
-												</span>
-
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													class="h-3 w-3"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-													<path
-														d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-													></path>
-												</svg>
-											</div>
-
-											<div class="flex-1 text-sm">
-												<p class="mb-2 first-letter:uppercase">
-													{review.message}
-												</p>
-
-												<div class="flex items-center gap-2 text-gray-500">
-													{#if review.user?.fullName}
-														<span>{review.user?.fullName}</span>
-
-														<span class="h-4 border-l border-gray-300"></span>
-													{/if}
-
-													<span>{date(review.createdAt)}</span>
-												</div>
-											</div>
-										</div>
-									{/if}
-								{/each}
-
-								{#if productReview?.data?.data?.length > showReviewsCount}
-									{#if !isLastReview}
-										<button
-											type="button"
-											class="text-sm font-semibold text-primary-500 transition duration-300 focus:outline-none hover:text-primary-700"
-											on:click="{() => handleShowReviewsCount(showReviewsCount)}"
-										>
-											Show More
-										</button>
-									{:else}
-										<button
-											type="button"
-											class="text-sm font-semibold text-primary-500 transition duration-300 focus:outline-none hover:text-primary-700"
-											on:click="{() => (showReviewsCount = 1)}"
-										>
-											Show Less
-										</button>
-									{/if}
-								{/if}
-							</div>
-						{/if}
-					{:else}
-						<div class="mb-5 text-sm">
-							No reviews yet, be the first one to review the data.product?.
-						</div>
-					{/if}
-
-					<button
-						type="button"
-						class="group flex items-center gap-1 text-sm font-bold text-primary-500 focus:outline-none hover:text-primary-700"
-						on:click="{() =>
-							goto(
-								`/my/reviews/create?product=${data.product?._id}&ref=/product/${data.product?.slug}`
-							)}"
-					>
-						<span>Add Your Review</span>
-
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-5 w-5 transform transition duration-500 group-hover:translate-x-2"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-								clip-rule="evenodd"></path>
-						</svg>
-					</button>
+				{/if}
 				</div>
-			</div>
-		</div>
+		</div>		
 
 		<!-- Frequently bought together -->
 
