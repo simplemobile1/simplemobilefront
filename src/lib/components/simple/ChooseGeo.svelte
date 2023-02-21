@@ -14,10 +14,24 @@ let matchingOptions = []
   let placeholder = "search for a region"
   let searchText = ``
   let choosed = false
-    function contrey (uu){
+  function  countryfind(uu){
+    let code
+    for (let t = 0 ; t < country.length ; t++){
+        if (country[t].name == uu){
+            code = country[t].code
+        }
+    }
+    return code
+  }
+  async function contrey (uu,ms){
+    if (ms =="ms"){
+         code = countryfind(uu)
+                 choosed = true
+    } else{
         console.log(uu)
         code = uu
         choosed = true
+    }
     }
     $:if (searchText.length > 0){
         open = false
@@ -39,11 +53,12 @@ let matchingOptions = []
     maxSelect={1}
     bind:searchText
     bind:open
+    on:add={()=> contrey(selected[0],"ms")}
     />
         <ul class="my-4  flex flex-wrap justify-center ">
     {#each list as state}
      <li >
-                <button on:click={()=>contrey(state.name)} class="m-1 flex items-center p-3 w-fit text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow">
+                <button on:click={()=>contrey(state.name,"")} class="m-1 flex items-center p-3 w-fit text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow">
                     <img alt="{state.name}" src="{state.flag_1x1}" aria-hidden="true" class="h-4"/>
                     <span class="flex-1 ml-3 whitespace-nowrap">{state.name}</span>
                     <span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded ">Popular</span>
