@@ -4,6 +4,7 @@
      import MultiSelect from 'svelte-multiselect';
     // import Prodgl from './prodgl.svelte'
     import Prodtab from '$lib/components/Product/ProductTab.svelte'
+    export let esim = true
 let list = country
   const ops = countries
 let matchingOptions = []
@@ -53,6 +54,6 @@ let matchingOptions = []
         </div>
 {:else}
 <button>close</button>
-<Prodtab {code}/>        
+<Prodtab {code} {esim}/>        
 {/if}
   

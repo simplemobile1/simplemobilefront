@@ -5,6 +5,7 @@
     // import Prodgl from './prodgl.svelte'
     import Prodtab from '$lib/components/Product/ProductTab.svelte'
 let list = country
+export let esim = true
   const ops = countries
 let matchingOptions = []
   let selected = []
@@ -53,6 +54,6 @@ let matchingOptions = []
         </div>
 {:else}
 <button>close</button>
-<Prodtab kind="geo" {code}/>        
+<Prodtab kind="geo" {code} {esim}/>        
 {/if}
   

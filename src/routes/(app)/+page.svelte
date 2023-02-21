@@ -1,5 +1,5 @@
 <script>
-import Tabs from '$lib/home/tabs.svelte'
+import EsimPhy from '$lib/components/simple/esimphichoose.svelte'
 import { page } from '$app/stores'
 import CategoriesMobile from '$lib/home/CategoriesMobile.svelte'
 import dayjs from 'dayjs'
@@ -111,7 +111,7 @@ $: heroBanners =
 		<div class="mb-5 sm:mb-10">
 			<Hero banners="{data.home.banners?.data}" />
 		</div>
-		<Tabs/>
+		<EsimPhy/>
 		<!-- TOP CATEGORIES 
 
 		{#if data.home?.categories?.data?.length > 0}
