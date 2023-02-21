@@ -21,6 +21,7 @@ export let esim = true
     <button
     on:click={()=>tab = 1}
     class:bg-simpl={tab == 1}
+    class:bg-third={tab != 1}
     class:text-white={tab == 1}
     class="
       nav-link
@@ -35,10 +36,12 @@ export let esim = true
       px-6
       py-3
       my-2
+      border 
+      border-sec
       hover:text-simpl
       text-sec
-      hover:border-transparent hover:bg-gray-100
-      focus:border-transparent
+      hover:border-simpl hover:bg-gray-100
+      focus:border-sec
       active
     " id="tabs-home-tabJustify" data-bs-toggle="pill" data-bs-target="#tabs-homeJustify" role="tab"
       aria-controls="tabs-homeJustify" aria-selected="true">local {esim == true ? "esim" : "sim"}</button>
@@ -47,14 +50,13 @@ export let esim = true
     <button 
         on:click={()=>tab = 2}
         class:bg-simpl={tab == 2}
+            class:bg-third={tab != 2}
+
         class:text-white={tab == 2}
     class="
       nav-link
       w-full
       md:text-xl
-            hover:text-simpl
-                  text-sec
-
       block
       font-bold
       text-xs
@@ -64,8 +66,12 @@ export let esim = true
       px-6
       py-3
       my-2
-      hover:border-transparent hover:bg-gray-100
-      focus:border-transparent
+      border 
+      border-sec
+      hover:text-simpl
+      text-sec
+      hover:border-simpl hover:bg-gray-100
+      focus:border-sec
     " id="tabs-profile-tabJustify" data-bs-toggle="pill" data-bs-target="#tabs-profileJustify" role="tab"
       aria-controls="tabs-profileJustify" aria-selected="false">Ragional {esim == true ? "esim" : "sim"}</button>
   </li>
@@ -73,13 +79,11 @@ export let esim = true
     <button 
     on:click={()=>tab = 3}
     class:bg-simpl={tab == 3}
+        class:bg-third={tab != 3}
     class:text-white={tab == 3}
     class="
       nav-link
       w-full
-            hover:text-simpl
-      text-sec
-
       block
       text-xs
       md:text-xl
@@ -90,8 +94,13 @@ export let esim = true
       px-6
       py-3
       my-2
-      hover:border-transparent hover:bg-gray-100
-      focus:border-transparent
+     bg-third
+      border 
+      border-sec
+      hover:text-simpl
+      text-sec
+      hover:border-simpl hover:bg-gray-100
+      focus:border-sec
     " id="tabs-messages-tabJustify" 
       aria-controls="tabs-messagesJustify" aria-selected="false">Global {esim == true ? "esim" : "sim"}</button>
   </li>
