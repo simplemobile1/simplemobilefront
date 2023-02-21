@@ -180,13 +180,7 @@ async function submit() {
 	</form>
 
 	<div class="mx-auto mb-5 flex max-w-max flex-col gap-1 text-center text-sm">
-		<a
-			href="{`/auth/otp-login?ref=${$page.url.searchParams.get('ref') || '/'}`}"
-			aria-label="Click to login with phone"
-			class="whitespace-nowrap text-primary-500 hover:text-primary-700 hover:underline"
-		>
-			Login with Phone
-		</a>
+	
 
 		<a
 			href="{`/auth/signup?ref=${$page.url.searchParams.get('ref') || '/'}`}"
@@ -195,14 +189,14 @@ async function submit() {
 		>
 			Signup
 		</a>
-
+		<!---
 		<a
 			href="{$page.data.store?.adminUrl}?role=vendor&store={$page.data.store?.id}"
 			aria-label="Click to login as vendor"
 			class="whitespace-nowrap text-primary-500 hover:text-primary-700 hover:underline"
 		>
 			Join as Vendor
-		</a>
+		</a>-->
 	</div>
 
 	<p class="text-center text-sm text-gray-500">
