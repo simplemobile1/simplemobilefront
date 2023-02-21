@@ -20,8 +20,8 @@
     "title": "buy esim cards ",
     "storeCurrency": {
       "_id": "63608d2bff7820e5d37b039c",
-      "isoCode": "USD",
-      "symbol": "$",
+      "isoCode": "ILS",
+      "symbol": "₪",
       "decimalDigits": 2
     },
     "logo": "https://res.cloudinary.com/dudiwaoky/image/upload/v1675869558/try3-1-removebg-preview_1_ftrpxg.png",
