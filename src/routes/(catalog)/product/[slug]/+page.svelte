@@ -679,6 +679,7 @@ function handleMobileCanvas() {
 					<div
 						class="box-shadow itmes-center fixed inset-x-0 bottom-0 z-10 grid w-full grid-cols-5 gap-2 border-t bg-white p-2 uppercase md:static md:mb-5 md:grid-cols-2 md:border-t-0 md:bg-transparent md:p-0 lg:max-w-sm"
 					>
+					<!---
 						<div class="col-span-2 md:col-span-1">
 							<WhiteButton
 								type="button"
@@ -721,9 +722,10 @@ function handleMobileCanvas() {
 								{/if}
 							</WhiteButton>
 						</div>
-
+						data.product?.active &&
+					-->
 						<div class="col-span-3 md:col-span-1">
-							{#if data.product?.active && data.product?.hasStock}
+							{#if  data.product?.hasStock}
 								{#if cartButtonText === 'Go to cart'}
 									<a
 										href="/cart"
@@ -776,8 +778,8 @@ function handleMobileCanvas() {
 											}
 										}}"
 									>
-										<input type="hidden" name="pid" value="{data?.product?._id}" />
-										<input type="hidden" name="vid" value="{data?.product?._id}" />
+										<input type="hidden" name="pid" value="{data?.product?.id}" />
+										<input type="hidden" name="vid" value="{data?.product?.id}" />
 
 										<input
 											type="hidden"

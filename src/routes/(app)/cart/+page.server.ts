@@ -52,11 +52,12 @@ export const load: PageServerLoad = async ({ url, request, locals, cookies }) =>
 
 const add: Action = async ({ request, cookies, locals }) => {
 	const data = await request.formData()
+	console.log("behhh",data)
 	const pid = data.get('pid')
-	const vid = data.get('pid')
-	const linkedItems = JSON.parse(data.get('linkedItems'))
-	const options = JSON.parse(data.get('options')) //data.get('options') //
-	const customizedImg = data.get('customizedImg')
+	//const vid = data.get('pid')
+	//const linkedItems = JSON.parse(data.get('linkedItems'))
+	c//onst options = JSON.parse(data.get('options')) //data.get('options') //
+	//const customizedImg = data.get('customizedImg')
 	if (typeof pid !== 'string' || !pid) {
 		return fail(400, { invalid: true })
 	}

@@ -198,8 +198,7 @@ function changePincode() {
 			</p>
 
 			<ul class="mt-4 ml-4 flex list-disc flex-col gap-1 text-sm">
-				<li>100% Original Products</li>
-				<li>Pay on delivery might be available</li>
+				<li>Shipping fee: 30₪</li>
 				<!-- <li>Easy 30 days returns and exchanges</li>
 				<li>Try & Buy might be available</li> -->
 			</ul>

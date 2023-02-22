@@ -270,36 +270,12 @@ async function getStoreData() {
 							<span>Working Days/Hours</span>
 						</h6>
 
-						<p>Mon – Sat / 7AM – 9PM</p>
+						<p>Sun – Tue / 9AM – 9PM</p>
 					</li>
 				</ul>
 			</div>
 
-			<div>
-				<h5 class="mb-4 whitespace-nowrap font-semibold uppercase">
-					Experience {$page.data.store?.websiteName} app on mobile
-				</h5>
-
-				<div class="flex items-center gap-1">
-					<a
-						href="https://"
-						aria-label="Click for the app link on Google Play"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<img src="{googlePlay}" alt="" class="h-auto w-32 object-contain object-left" />
-					</a>
-
-					<a
-						href="https://"
-						aria-label="Click for the app link on App Store"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<img src="{appStore}" alt="" class="h-auto w-32 object-contain object-left p-1" />
-					</a>
-				</div>
-			</div>
+			
 
 			{#if $page.data.store?.facebookPage || $page.data.store?.instagramPage || $page.data.store?.twitterPage || $page.data.store?.email || $page.data.store?.linkedinPage || $page.data.store?.pinterestPage || $page.data.store?.youtubeChannel}
 				<div>
