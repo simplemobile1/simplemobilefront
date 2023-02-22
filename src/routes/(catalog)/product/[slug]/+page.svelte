@@ -763,12 +763,12 @@ function handleMobileCanvas() {
 													? fireGTagEvent('remove_from_cart', result?.data)
 													: fireGTagEvent('add_to_cart', result?.data)
 
-												// cartButtonText = 'Added To Cart'
+												 cartButtonText = 'Added To Cart'
 												bounceItemFromTop = true
 												setTimeout(() => {
 													bounceItemFromTop = false
 												}, 3000)
-												// cartButtonText = 'Go to cart'
+												 cartButtonText = 'Go to cart'
 												if (customizedImg) {
 													goto(`/checkout/address`)
 												}

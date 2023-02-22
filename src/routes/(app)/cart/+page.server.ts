@@ -56,7 +56,7 @@ const add: Action = async ({ request, cookies, locals }) => {
 	const pid = data.get('pid')
 	//const vid = data.get('pid')
 	//const linkedItems = JSON.parse(data.get('linkedItems'))
-	c//onst options = JSON.parse(data.get('options')) //data.get('options') //
+	//onst options = JSON.parse(data.get('options')) //data.get('options') //
 	//const customizedImg = data.get('customizedImg')
 	if (typeof pid !== 'string' || !pid) {
 		return fail(400, { invalid: true })
@@ -64,41 +64,31 @@ const add: Action = async ({ request, cookies, locals }) => {
 	try {
 		let cart = await addToCartService({
 			pid,
-			vid,
+			//vid,
 			qty: 1,
-			options,
-			customizedImg,
-			storeId: locals.store?.id,
-			server: true,
+			//options,
+			//customizedImg,
+			//storeId: locals.store?.id,
+		//	server: true,
 			sid: cookies // This is a special case to pass complete cookie
 		})
-		if (linkedItems?.length) {
-			for (const i of linkedItems) {
-				cart = await addToCartService({
-					pid: i,
-					vid: i,
-					qty: 1,
-					storeId: locals.store?.id,
-					server: true,
-					sid: cookies
-				})
-			}
-		}
+		
 		if (cart) {
+			console.log("ttt",cart)
 			const cartObj = {
-				cartId: cart?.cart_id,
-				items: cart?.items,
-				qty: cart?.qty,
-				tax: cart?.tax,
-				subtotal: cart?.subtotal,
-				total: cart?.total,
+				cartId: cart?.data.id,
+				items: cart?.data.attributes.products.data,
+				qty: 1,
+				/*tax: cart?.tax,
+				subtotal: cart?.attributes.products.data.attributes.price,
+				total: cart?.attributes.products.data.attributes.price,
 				currencySymbol: cart?.currencySymbol,
 				discount: cart?.discount,
 				savings: cart?.savings,
 				selfTakeout: cart?.selfTakeout,
 				shipping: cart?.shipping,
 				unavailableItems: cart?.unavailableItems,
-				formattedAmount: cart?.formattedAmount
+				formattedAmount: cart?.formattedAmount*/
 			}
 			locals.cart = cartObj
 			locals.cartId = cartObj.cartId

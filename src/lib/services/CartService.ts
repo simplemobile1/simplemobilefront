@@ -4,7 +4,7 @@ import { del, getAPI, post } from '$lib/utils/api'
 import { getBigCommerceApi, getBySid, getWooCommerceApi, postBySid, postt } from '$lib/utils/server'
 import { serializeNonPOJOs } from '$lib/utils/validations'
 import { error } from '@sveltejs/kit'
-
+import { posttStrapi } from '$lib/utils/strapi'
 export const fetchCartData = async ({ origin, storeId, server = false, sid = null }: any) => {
 	try {
 		let res: any = {}
@@ -84,18 +84,30 @@ export const fetchMyCart = async ({ origin, storeId, server = false, sid = null 
 
 export const addToCartService = async ({
 	pid,
-	vid,
+	//vid,
 	qty,
-	customizedImg,
-	origin,
-	storeId,
-	server = false,
+	//customizedImg,
+	//origin,
+	//storeId,
+	//server = false,
 	sid = null
 }: any) => {
 	try {
 		let res: any = {}
 		switch (provider) {
 			case 'litekart':
+				
+				const data = {"data": {
+    "sid": 1,
+    "products": pid
+    				}
+			}
+
+			res = await	posttStrapi("/carts",data, sid)
+									console.log("tt",res)
+
+			break
+			/*case 'strapi':
 				if (server) {
 					res = await postt(
 						`carts/add-to-cart`,
@@ -127,7 +139,7 @@ export const addToCartService = async ({
 				break
 			case 'woocommerce':
 				res = await getWooCommerceApi(`carts/add-to-cart`, {})
-				break
+				break*/
 		}
 		return res || {}
 	} catch (e) {

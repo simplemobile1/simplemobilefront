@@ -16,7 +16,8 @@ return res
 } 
 
 export async function posttStrapi(endpoint: string, data: any, ck?: any) {
-	const ep = HTTP_ENDPOINT + '/api/' + endpoint
+	const ep = HTTP_ST_ENDPOINT + endpoint + "?populate=*"
+	console.log("ep,data",ep,data)
 	const response: any = await fetch(ep, {
 		method: 'POST',
 		credentials: 'include',
@@ -41,10 +42,12 @@ export async function posttStrapi(endpoint: string, data: any, ck?: any) {
 	} else if (response?.status > 399) {
 		throw { status: response.status, message: res }
 	} else {
+
 		return res
 	}
 }
 export async function postStrapi(endpoint: string, data: any, sid?: string) {
+	
 	const ep = HTTP_ENDPOINT + '/api/' + endpoint
 	const response = await fetch(ep, {
 		method: 'POST',
