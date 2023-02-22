@@ -1,6 +1,7 @@
 import { fetchMyCart } from '$lib/services/CartService'
 
 export async function GET({ request, locals, cookies }) {
+	console.log("fetchMyCard")
 	let cart: any = {}
 	const d = new Date()
 	cart = await fetchMyCart({

@@ -69,8 +69,11 @@ export async function postStrapi(endpoint: string, data: any, sid?: string) {
 	}
 }
 export async function getStrapi(endpoint: string, ck?: any) {
+	console.log("strapi!", endpoint)
 	const ck1 = cookie.parse(ck || '')
 	const ep = HTTP_ST_ENDPOINT + endpoint
+		console.log("strapi!", ep)
+
 	const response = await fetch(ep, {
 		method: 'GET',
 		//credentials: 'include',
@@ -84,6 +87,7 @@ export async function getStrapi(endpoint: string, ck?: any) {
 	} else if (response?.status > 399) {
 		throw { status: response.status, message: res }
 	} else {
+		console.log("strapi!!!",res)
 		return res
 	}
 }

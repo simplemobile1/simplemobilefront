@@ -1,6 +1,7 @@
 import cookie from 'cookie'
 import datavi from './../data/store.json'
 import datame from './../data/home.json'
+import { getStrapi } from './strapi'
 import {
 	BIG_COMMERCE_BASE_URL,
 	HTTP_ENDPOINT,
@@ -99,6 +100,9 @@ export const getBySid = async (endpoint: string, sid?: any) => {
 			return datavi
 	}else if (endpoint.startsWith("home")){
 		return datame
+	}else if (endpoint.startsWith("/carts")){
+		const res = await getStrapi(`${endpoint}?populate=*`)
+		return res
 	}else{
 	const response = await fetch(HTTP_ENDPOINT + '/api/' + endpoint, {
 		method: 'GET',

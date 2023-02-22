@@ -145,7 +145,7 @@ async function getStoreData() {
 				</div>
 			{/each}
 
-			{#if megamenu}
+		<!----	{#if megamenu}
 				<div>
 					<h5 class="mb-4 whitespace-nowrap font-semibold uppercase">Collections</h5>
 
@@ -171,7 +171,7 @@ async function getStoreData() {
 						{/each}
 					</ul>
 				</div>
-			{/if}
+			{/if}-->
 
 			<div>
 				<h5 class="mb-4 whitespace-nowrap font-semibold uppercase">Contact Us</h5>

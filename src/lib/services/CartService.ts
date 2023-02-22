@@ -30,17 +30,22 @@ export const fetchCartData = async ({ origin, storeId, server = false, sid = nul
 	}
 }
 
-export const fetchRefreshCart = async ({ origin, storeId, server = false, sid = null }: any) => {
+export const fetchRefreshCart = async ({ origin, cartId, server = false, sid = null }: any) => {
 	try {
 		let res: any = {}
 		switch (provider) {
-			case 'litekart':
+						case 'strapi':
 				if (server) {
 					res = await getBySid(`carts/refresh-cart?store=${storeId}`, sid)
 					// res = await getBySid(`carts/my?store=${storeId}`, sid)
 				} else {
 					res = await getAPI(`carts/refresh-cart?store=${storeId}`, origin)
 				}
+				break
+			case 'litekart':
+				
+					res = await getBySid(`/carts/${cartId}`, sid)
+				
 				break
 			case 'bigcommerce':
 				res = await getBigCommerceApi(`carts/refresh-cart`, {}, sid)

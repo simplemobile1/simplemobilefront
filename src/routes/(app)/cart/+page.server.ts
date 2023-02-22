@@ -6,19 +6,24 @@ import type { Action, Actions, PageServerLoad } from './$types'
 export const load: PageServerLoad = async ({ url, request, locals, cookies }) => {
 	let loading = false
 	let cart = locals.cart
+		console.log("kkk",locals.cart)
+			const cartId: string | undefined = cookies.get('cartId')
+		console.log(cartId)
+	//const cid = cookies.get('cartId')
+	//console.log(cid)
 	try {
 		loading = true
 		const res = await fetchRefreshCart({
-			storeId: locals.store?.id,
+			cartId: cartId,
 			sid: cookies.get('sid'),
 			server: true
 		})
 		if (res) {
 			cart = {
-				cartId: res?.cart_id,
-				items: res?.items,
-				qty: res?.qty,
-				tax: +res?.tax,
+				cartId: res?.data.id,
+				items: res?.data.attributes.products.data,
+				qty: 1,
+				/*tax: +res?.tax,
 				subtotal: +res?.subtotal,
 				total: +res?.total,
 				currencySymbol: res?.currencySymbol,
@@ -27,15 +32,15 @@ export const load: PageServerLoad = async ({ url, request, locals, cookies }) =>
 				selfTakeout: res?.selfTakeout,
 				shipping: res?.shipping,
 				unavailableItems: res?.unavailableItems,
-				formattedAmount: res?.formattedAmount
+				formattedAmount: res?.formattedAmount*/
 			}
 
 			cookies.set('cartId', cart.cartId, { path: '/' })
 			cookies.set('cartQty', cart.qty, { path: '/' })
 			// cookies.set('cart', JSON.stringify(cart), { path: '/' })
-			locals.cartId = cart.cartId
-			locals.cartQty = cart.qty
-			locals.cart = cart
+			//locals.cartId = cart.cartId
+			//locals.cartQty = cart.qty
+			//locals.cart = cart
 		}
 	} catch (e) {
 		// console.log('Error at /cart/+page.server.ts page.....', e)
