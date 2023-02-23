@@ -21,10 +21,10 @@ import { fetchProducts } from '$lib/services/ProductService'
 import { fetchCoupons } from '$lib/services/CouponService'
 import {
 	addToCartService,
-	applyCouponService,
-	removeCouponService
-} from '$lib/services/CartService'
+	
+} from '$lib/services/CartService'//applyCouponService,removeCouponService
 
+	
 export let data
 
 let seoProps = {
@@ -46,7 +46,7 @@ let couponErr
 
 onMount(() => {
 	getProducts()
-	getCoupons()
+	//getCoupons()
 	fireGTagEvent('view_cart', data.cart)
 })
 
@@ -65,7 +65,7 @@ const addToCart = async ({ pid, qty, customizedImg, ix }: any) => {
 
 	loading[ix] = false
 }
-
+/*
 function handleCouponCode(couponCode: string) {
 	selectedCouponCode = couponCode
 	applyCouponCode(selectedCouponCode)
@@ -101,7 +101,7 @@ async function removeCouponCode() {
 		loadingRemoveCoupon = false
 	}
 }
-
+*/
 async function getProducts() {
 	try {
 		loadingProducts = true
@@ -115,7 +115,7 @@ async function getProducts() {
 		loadingProducts = false
 	}
 }
-
+/*
 async function getCoupons() {
 	try {
 		loadingCoupon = true
@@ -129,6 +129,7 @@ async function getCoupons() {
 		loadingCoupon = false
 	}
 }
+*/
 </script>
 
 <SEO {...seoProps} />
@@ -265,7 +266,7 @@ async function getCoupons() {
 
 									<div class="flex w-full items-start gap-4 py-5">
 										<a
-											href="/product/{item?.slug}"
+											href="/product/{item?.attributes.slug}"
 											aria-label="Click to route product details"
 											class="flex-shrink-0 "
 										>
@@ -280,9 +281,9 @@ async function getCoupons() {
 												/>
 											{:else}
 												<img
-													src="{getCdnImageUrl(
-														item.img
-													)}?tr=w-auto,h-256,cm-pad_resize&sharpen=true"
+													src="{
+														item.attributes.img
+													}"
 													alt=""
 													width="128"
 													class="w-16 cursor-pointer rounded-md object-contain sm:w-32"
@@ -293,36 +294,28 @@ async function getCoupons() {
 										<div class="w-full flex-1">
 											<div class="mb-2 flex justify-between">
 												<a
-													href="/product/{item?.slug}"
+													href="/product/{item?.attributes.slug}"
 													aria-label="Click to route product details"
 													class="flex-1 cursor-pointer text-base font-medium text-gray-600 hover:underline sm:text-lg"
 												>
-													{item?.name}
+													{item?.attributes.name}
 												</a>
 
-												{#if $page?.data?.store?.isFnb && item.foodType}
-													<div>
-														{#if item.foodType === 'veg'}
-															<img src="{productVeg}" alt="veg" class="h-5 w-5" />
-														{:else if item.foodType === 'nonveg'}
-															<img src="{productNonVeg}" alt="non veg" class="h-5 w-5" />
-														{/if}
-													</div>
-												{/if}
+												
 											</div>
 											<div class="mb-2 flex flex-wrap items-center gap-2 text-sm sm:text-base">
 												<span class="text-lg font-bold sm:text-xl">
-													{item?.formattedItemAmount?.price}
+													{item?.attributes?.formattedPrice}
 												</span>
 
-												{#if item?.mrp > item?.price}
+												{#if item?.attributes.mrp > item?.attributes.price}
 													<span class="whitespace-nowrap text-gray-600 line-through">
 														{item?.formattedItemAmount?.mrp}
 													</span>
 
-													{#if Math.floor(((item.mrp - item.price) / item.mrp) * 100) > 0}
+													{#if Math.floor(((item.attributes.mrp - item.attributes.price) / item.attributes.mrp) * 100) > 0}
 														<span class="text-green-600">
-															({Math.floor(((item.mrp - item.price) / item.mrp) * 100)}% off)
+															({Math.floor(((item.attributes.mrp - item.attributes.price) / item.attributes.mrp) * 100)}% off)
 														</span>
 													{/if}
 												{/if}
@@ -386,7 +379,7 @@ async function getCoupons() {
 																class="h-auto w-5 object-contain object-center"
 															/>
 														{:else}
-															<span>{item?.qty}</span>
+															<span>{data.cart?.qty}</span>
 														{/if}
 													</div>
 
@@ -458,7 +451,7 @@ async function getCoupons() {
 				</div>
 
 				<div class="w-full lg:w-80 lg:flex-shrink-0 lg:flex-grow-0">
-					<!-- Promo code section -->
+					<!-- Promo code section
 
 					{#if data.cart?.discount?.amount > 0}
 						<div class="mt-3 flex w-full items-center justify-between text-sm">
@@ -501,7 +494,7 @@ async function getCoupons() {
 									d="M9 5l7 7-7 7"></path>
 							</svg>
 						</button>
-					{/if}
+					{/if} -->
 
 					<Pricesummary
 						cart="{data.cart}"

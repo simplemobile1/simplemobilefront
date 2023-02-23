@@ -14,19 +14,20 @@ export const fetchCart = async (event: RequestEvent) => {
 		const sid = event.cookies.get('sid')
 		const cartRes = await getBySid(`/carts/${cartId}`, sid)
 		const cart = {
-			cartId: cartRes.data.id,
-			items: cartRes.data.attributes.products,
-			qty: 1,
-			/*tax: cartRes.tax,
-			subtotal: cartRes.subtotal,
-			total: cartRes.total,
-			currencySymbol: cartRes.currencySymbol,
-			discount: cartRes.discount,
-			selfTakeout: cartRes.selfTakeout,
-			shipping: cartRes.shipping,
-			unavailableItems: cartRes.unavailableItems,
-			formattedAmount: cartRes.formattedAmount*/
-		}
+				cartId: cartRes?.data.id,
+				items: cartRes?.data.attributes.products.data,
+				qty: cartRes?.data.attributes.qty,
+				tax: cartRes?.data.attributes.tax,
+				subtotal: cartRes?.data.attributes.subtotal,
+				total: cartRes?.data.attributes.total,
+				currencySymbol: cartRes?.data.attributes.currencySymbol,
+				discount: cartRes?.data.attributes.discount,
+				savings: cartRes?.data.attributes.savings,
+				selfTakeout: cartRes?.data.attributes.selfTakeout,
+				shipping: cartRes?.data.attributes.shipping,
+				unavailableItems: cartRes?.data.attributes.unavailableItems.data,
+				formattedAmount: cartRes?.data.attributes.formattedAmount
+			}
 		return cart
 	} catch (e) {
 		return null

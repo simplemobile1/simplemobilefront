@@ -795,7 +795,8 @@ function handleMobileCanvas() {
 											value="{JSON.stringify(selectedOptions1)}"
 										/>
 
-										<input type="hidden" name="customizedImg" value="{customizedImg}" />
+										<input type="hidden" name="customizedImg" value="{customizedImg || data.product?.img}" />
+										<input type="hidden" name="prod" value="{JSON.stringify(data.product)}" />
 
 										<PrimaryButton
 											type="submit"

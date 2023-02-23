@@ -19,28 +19,28 @@ export const load: PageServerLoad = async ({ url, request, locals, cookies }) =>
 			server: true
 		})
 		if (res) {
-			cart = {
+			const cart = {
 				cartId: res?.data.id,
 				items: res?.data.attributes.products.data,
-				qty: 1,
-				/*tax: +res?.tax,
-				subtotal: +res?.subtotal,
-				total: +res?.total,
-				currencySymbol: res?.currencySymbol,
-				discount: res?.discount,
-				savings: res?.savings,
-				selfTakeout: res?.selfTakeout,
-				shipping: res?.shipping,
-				unavailableItems: res?.unavailableItems,
-				formattedAmount: res?.formattedAmount*/
+				qty: res?.data.attributes.qty,
+				tax: res?.data.attributes.tax,
+				subtotal: res?.data.attributes.subtotal,
+				total: res?.data.attributes.total,
+				currencySymbol: res?.data.attributes.currencySymbol,
+				discount: res?.data.attributes.discount,
+				savings: res?.data.attributes.savings,
+				selfTakeout: res?.data.attributes.selfTakeout,
+				shipping: res?.data.attributes.shipping,
+				unavailableItems: res?.data.attributes.unavailableItems.data,
+				formattedAmount: res?.data.attributes.formattedAmount
 			}
-
+	
 			cookies.set('cartId', cart.cartId, { path: '/' })
 			cookies.set('cartQty', cart.qty, { path: '/' })
-			// cookies.set('cart', JSON.stringify(cart), { path: '/' })
-			//locals.cartId = cart.cartId
-			//locals.cartQty = cart.qty
-			//locals.cart = cart
+			 cookies.set('cart', JSON.stringify(cart), { path: '/' })
+			locals.cartId = cart.cartId
+			locals.cartQty = cart.qty
+			locals.cart = cart
 		}
 	} catch (e) {
 		// console.log('Error at /cart/+page.server.ts page.....', e)
@@ -59,6 +59,9 @@ const add: Action = async ({ request, cookies, locals }) => {
 	const data = await request.formData()
 	console.log("behhh",data)
 	const pid = data.get('pid')
+	 const prod = JSON.parse(data.get('prod'))
+	 	console.log("behhh",prod.total)
+
 	//const vid = data.get('pid')
 	//const linkedItems = JSON.parse(data.get('linkedItems'))
 	//onst options = JSON.parse(data.get('options')) //data.get('options') //
@@ -75,7 +78,8 @@ const add: Action = async ({ request, cookies, locals }) => {
 			//customizedImg,
 			//storeId: locals.store?.id,
 		//	server: true,
-			sid: cookies // This is a special case to pass complete cookie
+			sid: cookies, // This is a special case to pass complete cookie
+			prod: prod
 		})
 		
 		if (cart) {
@@ -84,16 +88,16 @@ const add: Action = async ({ request, cookies, locals }) => {
 				cartId: cart?.data.id,
 				items: cart?.data.attributes.products.data,
 				qty: 1,
-				/*tax: cart?.tax,
-				subtotal: cart?.attributes.products.data.attributes.price,
-				total: cart?.attributes.products.data.attributes.price,
-				currencySymbol: cart?.currencySymbol,
-				discount: cart?.discount,
-				savings: cart?.savings,
-				selfTakeout: cart?.selfTakeout,
-				shipping: cart?.shipping,
-				unavailableItems: cart?.unavailableItems,
-				formattedAmount: cart?.formattedAmount*/
+				tax: cart?.data.attributes.tax,
+				subtotal: cart?.data.attributes.subtotal,
+				total: cart?.data.attributes.total,
+				currencySymbol: cart?.data.attributes.currencySymbol,
+				discount: cart?.data.attributes.discount,
+				savings: cart?.data.attributes.savings,
+				selfTakeout: cart?.data.attributes.selfTakeout,
+				shipping: cart?.data.attributes.shipping,
+				unavailableItems: cart?.data.attributes.unavailableItems.data,
+				formattedAmount: cart?.data.attributes.formattedAmount
 			}
 			locals.cart = cartObj
 			locals.cartId = cartObj.cartId

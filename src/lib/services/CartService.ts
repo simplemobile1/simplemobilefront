@@ -95,7 +95,8 @@ export const addToCartService = async ({
 	//origin,
 	//storeId,
 	//server = false,
-	sid = null
+	sid = null,
+	prod,
 }: any) => {
 	try {
 		let res: any = {}
@@ -103,8 +104,19 @@ export const addToCartService = async ({
 			case 'litekart':
 				
 				const data = {"data": {
-    "sid": 1,
-    "products": pid
+								"prod":	[{
+									"pid":pid,
+									"qty":qty,
+									"isPh":!prod.es
+								}],			
+    							"sid": 1,
+								"hasPh":!prod.es,
+								"totalqty":qty,
+								"total":prod.price,
+								"subtotal":prod.price,
+								"shipping":`${prod.es == true ? 0 : 30}`,
+								"formattedAmount":prod.formattedPrice,
+    							"products": pid
     				}
 			}
 
@@ -151,7 +163,7 @@ export const addToCartService = async ({
 		throw error(e.status, e.data?.message || e.message)
 	}
 }
-
+/*
 export const applyCouponService = async ({
 	code,
 	origin,
@@ -217,3 +229,4 @@ export const removeCouponService = async ({
 		throw error(e.status, e.data?.message || e.message)
 	}
 }
+*/
