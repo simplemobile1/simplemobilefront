@@ -20,9 +20,10 @@ export const load: PageServerLoad = async ({ url, request, locals, cookies }) =>
 		})
 		if (res) {
 			const cart = {
+				hasPh:res?.data.attributes.hasPh,
 				cartId: res?.data.id,
 				items: res?.data.attributes.products.data,
-				qty: res?.data.attributes.qty,
+				qty: res?.data.attributes.totalqty,
 				tax: res?.data.attributes.tax,
 				subtotal: res?.data.attributes.subtotal,
 				total: res?.data.attributes.total,
@@ -85,9 +86,10 @@ const add: Action = async ({ request, cookies, locals }) => {
 		if (cart) {
 			console.log("ttt",cart)
 			const cartObj = {
+								hasPh:cart?.data.attributes.hasPh,
 				cartId: cart?.data.id,
 				items: cart?.data.attributes.products.data,
-				qty: 1,
+				qty: cart?.data.attributes.totalqty,
 				tax: cart?.data.attributes.tax,
 				subtotal: cart?.data.attributes.subtotal,
 				total: cart?.data.attributes.total,

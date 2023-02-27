@@ -42,7 +42,7 @@ function submit() {
 			<div class="mt-2 flex items-center justify-between font-medium">
 				<h4>Total</h4>
 
-				<h4>{cart.formattedAmount?.subtotal || '-'}</h4>
+				<h4>{cart.subtotal || '-'}</h4>
 			</div>
 
 			{#if cart?.savings > 0}
@@ -70,17 +70,17 @@ function submit() {
 			<div class="mt-2 flex items-center justify-between font-medium">
 				<h4>Tax</h4>
 
-				<h4>{cart?.formattedAmount?.tax || '-'}</h4>
+				<h4>{cart?.tax || '-'}</h4>
 			</div>
 
 			<div class="mt-2 flex items-center justify-between font-medium">
 				<h4>Shipping</h4>
 
 				<h4>
-					{#if cart.shipping?.charge < 1}
+					{#if cart.shipping < 1}
 						<span class="text-green-500">Free</span>
 					{:else}
-						{currency(cart.shipping?.charge)}
+						{currency(cart.shipping)}
 					{/if}
 				</h4>
 			</div>
@@ -97,7 +97,7 @@ function submit() {
 			<div class="my-2 mb-5 flex items-center justify-between text-lg font-bold ">
 				<h4>Total Amount</h4>
 
-				{cart.formattedAmount?.total}
+				{cart.total}
 			</div>
 		{/if}
 		<div class="hidden md:block">

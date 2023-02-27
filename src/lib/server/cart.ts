@@ -14,9 +14,10 @@ export const fetchCart = async (event: RequestEvent) => {
 		const sid = event.cookies.get('sid')
 		const cartRes = await getBySid(`/carts/${cartId}`, sid)
 		const cart = {
+			hasPh:cartRes?.data.attributes.hasPh,
 				cartId: cartRes?.data.id,
 				items: cartRes?.data.attributes.products.data,
-				qty: cartRes?.data.attributes.qty,
+				qty: cartRes?.data.attributes.totalqty,
 				tax: cartRes?.data.attributes.tax,
 				subtotal: cartRes?.data.attributes.subtotal,
 				total: cartRes?.data.attributes.total,

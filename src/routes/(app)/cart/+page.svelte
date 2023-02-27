@@ -498,8 +498,8 @@ async function getCoupons() {
 
 					<Pricesummary
 						cart="{data.cart}"
-						nextpage="/checkout/address"
-						text="Select Address"
+						nextpage={data.cart.hasPh == true ? "/checkout/address" : "/checkout/payment-options"}
+						text={data.cart.hasPh == true ? "Select Address" : "Select payment options"}
 						showNextIcon
 					/>
 				</div>
