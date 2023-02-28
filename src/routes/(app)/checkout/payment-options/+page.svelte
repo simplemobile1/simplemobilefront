@@ -209,8 +209,6 @@ import { loadScript } from "@paypal/paypal-js";
         },
         createOrder: function (data, actions) {
           // Set up the transaction
-		  			loading = true
-
           return actions.order.create({
             purchase_units: [
               {
@@ -224,7 +222,7 @@ import { loadScript } from "@paypal/paypal-js";
         onApprove: function (data, actions) {
           // Capture order after payment approved
           return actions.order.capture().then(function (details) {
-						loading = false
+									loading = false
 
 						toast('Payment success', 'success')
 						goto(`/payment/success?id=${details}`)
