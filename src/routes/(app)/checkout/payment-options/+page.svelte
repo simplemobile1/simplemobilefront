@@ -7,9 +7,10 @@
 .z-index {
 	z-index: 99999;
 }
+
 </style>
 
-<script>
+<script lang="ts">
 import { toast } from '$lib/utils'
 import { fireGTagEvent } from '$lib/utils/gTag'
 import { goto } from '$app/navigation'
@@ -51,7 +52,7 @@ let errorMessage = 'Select a Payment Method',
 	},
 	selectedPaymentMethod = {
 		id: '',
-		name: '',
+		name: 'paypal',
 		text: '',
 		instructions: '',
 		qrcode: '',
@@ -192,6 +193,56 @@ async function submit(pm) {
 function checkIfStripeCardValid({ detail }) {
 	disabled = !detail
 }
+
+import { loadScript } from "@paypal/paypal-js";
+  export let cartTotal = 0.01;//data.cart.totalamount
+  const CLIENT_ID = "test"; // change this to your own client id
+  onMount(async() =>{
+
+
+  loadScript({ "client-id": CLIENT_ID }).then((paypal ) => {
+    paypal
+      .Buttons({
+        style: {
+          color: "blue",
+          shape: "pill",
+        },
+        createOrder: function (data, actions) {
+          // Set up the transaction
+		  			loading = true
+
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: cartTotal,
+                },
+              },
+            ],
+          });
+        },
+        onApprove: function (data, actions) {
+          // Capture order after payment approved
+          return actions.order.capture().then(function (details) {
+						loading = false
+
+						toast('Payment success', 'success')
+						goto(`/payment/success?id=${details}`)
+          });
+        },
+        onError: function (err) {
+          // Log error if something goes wrong during approval
+          alert("Something went wrong");
+          console.log("Something went wrong", err);
+		  		paymentDenied = true
+										loading = false
+			goto(`/payment/failure?ref=/checkout/payment-options?address=${data.addressId}`)
+
+        },
+      })
+      .render("#paypal-button-container");
+  });
+    })
 </script>
 
 <SEO {...seoProps} />
@@ -203,7 +254,7 @@ function checkIfStripeCardValid({ detail }) {
 
 	<div class="mt-10 flex flex-col gap-10 md:flex-row md:justify-center xl:gap-20">
 		<div class="w-full flex-1">
-			<h2 class="mb-5 text-xl font-bold capitalize tracking-wide sm:text-2xl">Payment Options</h2>
+			<!--<h2 class="mb-5 text-xl font-bold capitalize tracking-wide sm:text-2xl">Payment Options</h2>
 
 			{#if data.paymentMethods}
 				<div class="flex w-full flex-col gap-4" class:wiggle="{paymentDenied}">
@@ -278,7 +329,7 @@ function checkIfStripeCardValid({ detail }) {
 						</p>
 					</div>
 				</div>
-			{/if}
+			{/if}-->
 
 			<Stripe
 				address="{data.addressId}"
@@ -394,13 +445,16 @@ function checkIfStripeCardValid({ detail }) {
 				cart="{data.cart}"
 				text="{errorMessage || 'Confirm Order'}"
 				loading="{loading}"
-				hideCheckoutButton="{selectedPaymentMethod.name === 'Stripe'}"
+				hideCheckoutButton="{selectedPaymentMethod.name === 'Stripe' || "paypal"}"
 				disabled="{!razorpayReady ||
 					!selectedPaymentMethod?.name ||
 					(selectedPaymentMethod?.name === 'Stripe' && disabled)}"
 				on:submit="{() => submit(selectedPaymentMethod)}"
 			/>
+							<div class="-mt-2 md:m-0" id="paypal-button-container" />
+
 		</div>
+
 	</div>
 </div>
 

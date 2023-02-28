@@ -44,7 +44,7 @@ export async function load({ params, parent, locals, url, request, cookies }) {
 			id,
 			sid: cookies.get('sid')
 		})
-		const paymentMethods = await fetchPaymentMethods({ storeId: locals.store.id, server: true })
+		const paymentMethods = {name: 'paypal'}//await fetchPaymentMethods({ storeId: locals.store.id, server: true })
 		return { paymentMethods, address, addressId: id, me, cart }
 	} catch (e) {
 		if (e) {

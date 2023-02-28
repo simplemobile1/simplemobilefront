@@ -73,6 +73,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@paypal/paypal-js": "5.1.4",
 		"svelte-multiselect": "8.3.0"
 	}
 }
