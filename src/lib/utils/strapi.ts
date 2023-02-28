@@ -47,8 +47,9 @@ export async function posttStrapi(endpoint: string, data: any, ck?: any) {
 	}
 }
 export async function postStrapi(endpoint: string, data: any, sid?: string) {
-	
-	const ep = HTTP_ENDPOINT + '/api/' + endpoint
+									console.log("nbnnnn jjjjj",endpoint)
+
+	const ep = HTTP_ST_ENDPOINT  + endpoint
 	const response = await fetch(ep, {
 		method: 'POST',
 		credentials: 'include',
@@ -60,11 +61,13 @@ export async function postStrapi(endpoint: string, data: any, sid?: string) {
 	})
 	const isJson = response.headers.get('content-type')?.includes('application/json')
 	const res = isJson ? await response.json() : await response.text()
+									console.log("nbnnnn jjjjj",res)
 	if (res?.status > 399) {
 		throw { status: res.status, message: res }
 	} else if (response?.status > 399) {
 		throw { status: response.status, message: res }
 	} else {
+								console.log("nbnnnn jjjjj",res)
 		return res
 	}
 }

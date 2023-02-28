@@ -2,13 +2,8 @@ import { env } from '$env/dynamic/public'
 
 export * from './website'
 export const authorInfo = {
-	author: 'Swadesh Behera',
-	facebookAuthorPage: `https://www.facebook.com/codenx`,
-	facebookPageName: 'codenx',
-	githubPage: 'itswadesh',
-	linkedinProfile: 'itswadesh',
-	telegramUsername: 'itswadesh',
-	twitterUsername: 'itswadesh'
+	author: 'Baruch babayof',
+	authorInfo: `https://www.1lev1/world`
 }
 export const currency = { symbol: '₪', code: 'ILS' }
 export const adminUrl = 'https://strapi-57j3.onrender.com/admin'

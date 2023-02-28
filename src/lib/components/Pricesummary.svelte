@@ -97,7 +97,7 @@ function submit() {
 			<div class="my-2 mb-5 flex items-center justify-between text-lg font-bold ">
 				<h4>Total Amount</h4>
 
-				{cart.total}
+				{cart.total}{cart.currencySymbol}
 			</div>
 		{/if}
 		<div class="hidden md:block">

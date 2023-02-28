@@ -12,26 +12,29 @@ export async function load({ params, parent, locals, url, request, cookies }) {
 		throw redirect(307, redirectUrl)
 	}
 	const cartRes: any = await fetchRefreshCart({
-		storeId: locals.store?.id,
+		cartId: locals.cartId,
 		server: true,
 		sid: cookies.get('sid')
 	})
 	const cart = {
-		cartId: cartRes.cart_id,
-		items: cartRes.items,
-		qty: cartRes.qty,
-		tax: cartRes.tax,
-		subtotal: cartRes.subtotal,
-		total: cartRes.total,
-		currencySymbol: cartRes.currencySymbol,
-		discount: cartRes.discount,
-		savings: cartRes.savings,
-		selfTakeout: cartRes.selfTakeout,
-		shipping: cartRes.shipping,
-		unavailableItems: cartRes.unavailableItems,
-		formattedAmount: cartRes.formattedAmount
-	}
+								hasPh:cartRes?.data.attributes.hasPh,
+				cartId: cartRes?.data.id,
+				items: cartRes?.data.attributes.products.data,
+				qty: cartRes?.data.attributes.totalqty,
+				tax: cartRes?.data.attributes.tax,
+				subtotal: cartRes?.data.attributes.subtotal,
+				total: cartRes?.data.attributes.total,
+				currencySymbol: cartRes?.data.attributes.currencySymbol,
+				discount: cartRes?.data.attributes.discount,
+				savings: cartRes?.data.attributes.savings,
+				selfTakeout: cartRes?.data.attributes.selfTakeout,
+				shipping: cartRes?.data.attributes.shipping,
+				unavailableItems: cartRes?.data.attributes.unavailableItems.data,
+				formattedAmount: cartRes?.data.attributes.formattedAmount
+			}
+	
 	locals.cart = cart
+	if(cart.hasPh){
 	try {
 		const id = url.searchParams.get('address')
 
@@ -48,4 +51,5 @@ export async function load({ params, parent, locals, url, request, cookies }) {
 			throw redirect(307, '/checkout/address')
 		}
 	}
+}
 }

@@ -8,6 +8,7 @@ import {
 	postBigCommerceApi,
 	postWooCommerceApi
 } from '$lib/utils/server'
+import { postStrapi } from '$lib/utils/strapi'
 import { serializeNonPOJOs } from '$lib/utils/validations'
 import { error } from '@sveltejs/kit'
 
@@ -16,6 +17,9 @@ export const fetchMeData = async ({ origin, storeId, server = false, sid = null 
 		let res: any = {}
 		switch (provider) {
 			case 'litekart':
+				console.log("here fetchMeData",origin)
+				break
+				case 'strapi':
 				if (server) {
 					res = await getBySid(`users/me?store=${storeId}`, sid)
 				} else {
@@ -38,7 +42,6 @@ export const fetchMeData = async ({ origin, storeId, server = false, sid = null 
 export const signupService = async ({
 	firstName,
 	lastName,
-	phone,
 	email,
 	password,
 	passwordConfirmation,
@@ -51,6 +54,18 @@ export const signupService = async ({
 		let res: any = {}
 		switch (provider) {
 			case 'litekart':
+						console.log("nbnnnn jjjjj")
+
+				res = await postStrapi(
+					`/auth/local/register`,
+					{
+						username: firstName + " " + lastName,
+						email: email,
+						password: password
+					}
+				)
+				break
+				case 'strapi':
 				res = await post(
 					`signup`,
 					{

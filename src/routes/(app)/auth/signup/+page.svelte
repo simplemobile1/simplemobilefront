@@ -52,11 +52,11 @@ function toggleConfirmPassword() {
 async function submit(n) {
 	try {
 		loading = true
-		const { firstName, lastName, phone, email, password, passwordConfirmation } = n
+		const { firstName, lastName, email, password, passwordConfirmation } = n
+		console.log("nbnnnn")
 		const res = await signupService({
 			firstName: firstName,
 			lastName: lastName,
-			phone: phone,
 			email: email,
 			password: password,
 			passwordConfirmation: passwordConfirmation,
@@ -65,14 +65,13 @@ async function submit(n) {
 		})
 
 		const me = {
-			email: res.email,
-			phone: res.phone,
-			firstName: res.firstName,
-			lastName: res.lastName,
-			avatar: res.avatar,
-			role: res.role,
-			verified: res.verified,
-			active: res.active
+			email: res.user.email,
+			username: res.user.username,
+			avatar: res?.avatar,
+			role: res?.role,
+			verified: res?.verified,
+			active: res?.active,
+			tok: res.token
 		}
 
 		await cookies.set('me', me, { path: '/' })
@@ -115,14 +114,6 @@ async function submit(n) {
 			bind:value="{newResistration.lastName}"
 		/>
 
-		<TextboxFloating
-			type="tel"
-			label="Phone"
-			class="w-full"
-			required
-			bind:value="{newResistration.phone}"
-		/>
-
 		<div>
 			<TextboxFloating
 				type="email"
@@ -132,16 +123,7 @@ async function submit(n) {
 				bind:value="{newResistration.email}"
 			/>
 
-			<p class="text-xs">
-				Do not have email?
-				<a
-					href="{$page.data.store?.loginUrl}"
-					aria-label="Click to login using phone number"
-					class="text-primary-500 hover:underline"
-				>
-					Sign up using phone number
-				</a>
-			</p>
+		
 		</div>
 
 		<div class="relative">

@@ -13,7 +13,7 @@
         "dimentionUnit": "cm",
         "domain": "",
         "email": "xx@gmail.com",
-        "otpLogin": true,
+        "otpLogin": false,
         "loginUrl": "/auth/login",
         "isFnb": false,
         "keywords": "online shopping, online shopping sites, simCard, sim, Online shopping site",
