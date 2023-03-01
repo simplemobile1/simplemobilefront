@@ -193,10 +193,11 @@ async function submit(pm) {
 function checkIfStripeCardValid({ detail }) {
 	disabled = !detail
 }
+import { env } from '$env/dynamic/public'
 
 import { loadScript } from "@paypal/paypal-js";
   export let cartTotal = 0.01;//data.cart.totalamount
-  const CLIENT_ID = "test"; // change this to your own client id
+  const CLIENT_ID = "AcigUoH8jAqW8L-JRi_VnQO_OR9ypNKBieMxh2SirOz75-CRcGzwbdhIIOco81ktyomf6hoIN3_MOZ1P"// env.VITE_CLE; // change this to your own client id
   onMount(async() =>{
 
 
@@ -251,8 +252,10 @@ import { loadScript } from "@paypal/paypal-js";
 	<CheckoutHeader selected="payment" />
 
 	<div class="mt-10 flex flex-col gap-10 md:flex-row md:justify-center xl:gap-20">
-		<div class="w-full flex-1">
-			<!--<h2 class="mb-5 text-xl font-bold capitalize tracking-wide sm:text-2xl">Payment Options</h2>
+			<!--
+						<div class="w-full flex-1">
+
+				<h2 class="mb-5 text-xl font-bold capitalize tracking-wide sm:text-2xl">Payment Options</h2>
 
 			{#if data.paymentMethods}
 				<div class="flex w-full flex-col gap-4" class:wiggle="{paymentDenied}">
@@ -327,7 +330,7 @@ import { loadScript } from "@paypal/paypal-js";
 						</p>
 					</div>
 				</div>
-			{/if}-->
+			{/if}
 
 			<Stripe
 				address="{data.addressId}"
@@ -336,6 +339,8 @@ import { loadScript } from "@paypal/paypal-js";
 				on:isStripeCardValid="{checkIfStripeCardValid}"
 			/>
 		</div>
+		-->
+
 
 		<div class="w-full md:w-80 md:flex-shrink-0 md:flex-grow-0">
 			<h2 class="text-xl font-bold capitalize tracking-wide sm:text-2xl">Cart Summary</h2>
@@ -449,11 +454,12 @@ import { loadScript } from "@paypal/paypal-js";
 					(selectedPaymentMethod?.name === 'Stripe' && disabled)}"
 				on:submit="{() => submit(selectedPaymentMethod)}"
 			/>
-							<div class="-mt-2 md:m-0" id="paypal-button-container" />
 
 		</div>
+		<div class="-mt-2 md:m-0" id="paypal-button-container" />
 
 	</div>
+	
 </div>
 
 {#if loading}
