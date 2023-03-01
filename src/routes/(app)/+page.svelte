@@ -98,8 +98,8 @@ $: heroBanners =
 
 <div class="bg-opacity-25 bg-center bg-repeat">
 	<div class="mb-14 sm:mb-0">
-		<!-- CATEGORIES SLIDER MOBILE -->
-
+		<!-- CATEGORIES SLIDER MOBILE
+<
 		{#await data.home then home}
 			{#if home?.categories?.data?.length > 0}
 				<div class="block sm:hidden">
@@ -107,10 +107,11 @@ $: heroBanners =
 				</div>
 			{/if}
 		{/await}
-
+ -->
 		<div class="mb-5 sm:mb-10">
 			<Hero banners="{data.home.banners?.data}" />
 		</div>
+		
 		<EsimPhy/>
 		<!-- TOP CATEGORIES 
 

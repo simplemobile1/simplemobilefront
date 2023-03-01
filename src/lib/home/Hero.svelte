@@ -38,28 +38,30 @@ onMount(async () => {
 </div> -->
 
 {#if sliderBanners?.length > 0}
-	<div class="relative mx-auto hidden h-auto w-full overflow-hidden bg-white sm:block">
-		<svelte:component this="{Splide}" options="{{ type: 'loop', autoplay: true, lazyLoad: true }}">
-			{#each sliderBanners as b, ix}
+	<div class="relative mx-auto  h-auto w-full overflow-hidden bg-white sm:block">
+<!--	<svelte:component this="{Splide}" options="{{ type: 'loop', autoplay: true, lazyLoad: true }}">
+			
 				{#if b.img}
-					<SplideSlide>
-						<a
+					<SplideSlide>-->
+						{#each sliderBanners as b, ix}
+					<!--	<a
 							href="{b.link || '##'}"
 							aria-label="Click to route into banner related products page"
 							data-sveltekit-preload-data
-						>
+						>-->
 							<LazyImg
 								src="{b.img}"
 								alt="{b.name}"
 								height="380"
-								aspect_ratio="4:1"
+								aspect_ratio="17:5"
 								class="block h-auto w-full object-contain object-top"
 							/>
-						</a>
-					</SplideSlide>
+						
+									{/each}
+
+					<!--</SplideSlide></a>
 				{/if}
-			{/each}
-		</svelte:component>
+		</svelte:component>-->
 
 		<!-- <svelte:component this="{Carousel}">
 			{#each sliderBanners as b, ix}
