@@ -127,77 +127,14 @@ async function submit(pm) {
 		} finally {
 			loading = false
 		}
-	} else if (paymentMethod === 'Razorpay') {
-		try {
-			loading = true
-			const rp = await razorpayCheckout({
-				address: data.addressId,
-				storeId: $page.data.store?.id,
-				origin: $page.data.origin
-			})
-
-			const options = {
-				key: rp.keyId, // Enter the Key ID generated from the Dashboard
-				name: 'Litekart.in',
-				description: 'Payment for Litekart',
-				image: logo,
-				amount: rp.amount,
-				order_id: rp.id,
-				async handler(response) {
-					// console.log('response = ', response)
-
-					try {
-						const capture = await razorpayCapture({
-							rpPaymentId: response.razorpay_payment_id,
-							rpOrderId: response.razorpay_order_id,
-							storeId: $page.data.store?.id,
-							origin: $page.data.origin
-						})
-						toast('Payment success', 'success')
-						goto(`/payment/success?id=${capture._id}`)
-					} catch (e) {
-						goto(`/payment/failure?ref=/checkout/payment-options?address=${data.addressId}`)
-					} finally {
-					}
-				},
-				prefill: {
-					name: `${data.me.firstName} ${data.me.lastName}`,
-					phone: data.me.phone,
-					email: data.me.email || 'help@litekart.in',
-					contact: data.me.phone
-				},
-				notes: {
-					address: 'Padmajyoti Marg, Semiliguda, Odisha 764036'
-				},
-				theme: {
-					color: '#112D4E'
-				}
-			}
-
-			const rzp1 = new Razorpay(options)
-			rzp1.open()
-		} catch (e) {
-			toast(e?.message, 'error')
-		} finally {
-			loading = false
-		}
-	} else {
-		paymentDenied = true
-
-		setTimeout(() => {
-			paymentDenied = false
-		}, 820)
 	}
 }
 
-function checkIfStripeCardValid({ detail }) {
-	disabled = !detail
-}
-import { env } from '$env/dynamic/public'
+
 
 import { loadScript } from "@paypal/paypal-js";
   export let cartTotal = 0.01;//data.cart.totalamount
-  const CLIENT_ID = "AcigUoH8jAqW8L-JRi_VnQO_OR9ypNKBieMxh2SirOz75-CRcGzwbdhIIOco81ktyomf6hoIN3_MOZ1P"// env.VITE_CLE; // change this to your own client id
+  const CLIENT_ID = "AQzIyn54YrIoPOAu70sfpsyBwJoKDnRAPtpk4nGW1MGzI82dJaDTCkGStlXLl4LihSDMDusf-wBmfje9"// env.VITE_CLE; // change this to your own client id
   onMount(async() =>{
 
 
