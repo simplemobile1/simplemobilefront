@@ -131,6 +131,15 @@ export const loginService = async ({
 		let res: any = {}
 		switch (provider) {
 			case 'litekart':
+				res = await postStrapi(
+					`/auth/local`,
+					{
+						identifier: email,
+						password: password
+					}
+				)
+				break
+			case 'strapi':
 				res = await post(
 					`login`,
 					{
@@ -166,6 +175,13 @@ export const forgotPasswordService = async ({
 		let res: any = {}
 		switch (provider) {
 			case 'litekart':
+					res = await postStrapi(
+					`/auth/forgot-password`,
+					{
+						email: email					}
+				)
+				break
+			case 'strapi':
 				res = await post(
 					`users/forgot-password`,
 					{
@@ -175,7 +191,7 @@ export const forgotPasswordService = async ({
 					},
 					origin
 				)
-				break
+				break	
 			case 'bigcommerce':
 				res = await postBigCommerceApi(`signup`, {})
 				break
@@ -201,7 +217,17 @@ export const changePasswordService = async ({
 	try {
 		let res: any = {}
 		switch (provider) {
-			case 'litekart':
+				case 'litekart':
+					res = await postStrapi(
+					`/auth/reset-password`,
+					{
+						code: 'privateCode', // code contained in the reset link of step 3.
+    					password: password,
+    					passwordConfirmation: passwordConfirmation,
+					}
+				)
+				break
+			case 'strapi':
 				res = await post(
 					`users/change-password`,
 					{

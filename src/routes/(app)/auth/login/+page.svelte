@@ -35,7 +35,7 @@ let loading = false
 let showPassword = false
 let type = 'password'
 let err
-
+/*
 onMount(() => {
 	googleOneTap(
 		{
@@ -58,7 +58,7 @@ onMount(() => {
 			if (browser) goto(r)
 		}
 	)
-})
+})*/
 
 function togglePassword() {
 	showPassword = !showPassword
@@ -80,13 +80,12 @@ async function submit() {
 
 		const me = {
 			email: res.email,
-			phone: res.phone,
-			firstName: res.firstName,
-			lastName: res.lastName,
-			avatar: res.avatar,
+			firstName: res?.username,
+			/*avatar: res.avatar,
 			role: res.role,
 			verified: res.verified,
-			active: res.active
+			active: res.active*/
+			tok: res.token
 		}
 
 		await cookies.set('me', me, { path: '/' })
