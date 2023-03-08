@@ -29,6 +29,7 @@ import Stripe from '$lib/Stripe.svelte'
 import {
 	cashfreeCheckout,
 	codCheckout,
+	paypalCheckout,
 	razorpayCapture,
 	razorpayCheckout
 } from '$lib/services/OrdersService'
@@ -161,7 +162,11 @@ import { loadScript } from "@paypal/paypal-js";
           // Capture order after payment approved
           return actions.order.capture().then(function (details) {
 									loading = false
-
+				const res = await paypalCheckout({
+				address: data?.addressId,
+				details: details,
+					
+			})
 						toast('Payment success', 'success')
 						goto(`/payment/success?id=${details}`)
           });

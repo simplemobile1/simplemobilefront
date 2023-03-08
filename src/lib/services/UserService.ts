@@ -12,12 +12,20 @@ import { postStrapi } from '$lib/utils/strapi'
 import { serializeNonPOJOs } from '$lib/utils/validations'
 import { error } from '@sveltejs/kit'
 
-export const fetchMeData = async ({ origin, storeId, server = false, sid = null }: any) => {
+export const fetchMeData = async ({ origin, storeId, server = false, sid = null ,userId}: any) => {
 	try {
 		let res: any = {}
 		switch (provider) {
 			case 'litekart':
-				console.log("here fetchMeData",origin)
+				console.log(sid,"getme")
+			res = await postStrapi(
+					`/user/`+userId,
+					{
+						username: firstName + " " + lastName,
+						email: email,
+						password: password
+					}
+				)				
 				break
 				case 'strapi':
 				if (server) {

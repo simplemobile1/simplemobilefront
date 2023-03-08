@@ -71,7 +71,8 @@ async function submit(n) {
 			role: res?.role,
 			verified: res?.verified,
 			active: res?.active,
-			tok: res.token
+			tok: res.token,
+			id: res.id
 		}
 
 		await cookies.set('me', me, { path: '/' })

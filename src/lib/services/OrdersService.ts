@@ -115,6 +115,9 @@ export const paySuccessPageHit = async ({
 		let res: any = {}
 		switch (provider) {
 			case 'litekart':
+				res = await postBigCommerceApi(`orders/pay-sucess-page-hit`, {}, sid)
+				break
+			case 'strapi':
 				if (server) {
 					res = await postBySid(
 						`orders/pay-sucess-page-hit`,
@@ -151,7 +154,42 @@ export const paySuccessPageHit = async ({
 		throw error(e.status, e.data?.message || e.message)
 	}
 }
-
+export const paypalCheckout = async ({
+	address,
+	paymentMethod,
+	prescription,
+	storeId,
+	origin,
+	server = false,
+	sid = null
+}: any) => {
+	try {
+		let res: any = {}
+		switch (provider) {
+			case 'litekart':
+				res = await post(
+					`payments/checkout-rp`,
+					{
+						address,
+						paymentMethod,
+						prescription,
+						store: storeId
+					},
+					origin
+				)
+				break
+			case 'bigcommerce':
+				res = await postBigCommerceApi(`payments/checkout-rp`, {}, sid)
+				break
+			case 'woocommerce':
+				res = await postWooCommerceApi(`payments/checkout-rp`, {}, sid)
+				break
+		}
+		return res.data || []
+	} catch (e) {
+		throw error(e.status, e.data?.message || e.message)
+	}
+}
 export const codCheckout = async ({
 	address,
 	paymentMethod,
