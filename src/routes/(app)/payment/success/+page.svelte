@@ -108,6 +108,7 @@ onMount(async () => {
 				{/if}
 
 				<p class="mb-5 text-center text-sm">
+					אנחנו בעמוד הנכון פה יהיה ברקוד
 					A confirmation e-mail will be sent to the e-mail address that you specified in Order
 					details.
 				</p>
