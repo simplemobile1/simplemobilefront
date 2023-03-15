@@ -10,10 +10,10 @@ const send = async ({ method, path, params, data, token, headers, origin }: any)
 		path.includes('.css')
 	)
 		return
-	origin = origin || 'http://localhost:3000'
+	origin = origin || 'http://localhost:3111'
 	if (headers && headers.get('cookie') && headers.get('cookie').includes('store')) {
 		origin = headers.get('origin') || headers.get('host')
-		if (origin === 'localhost:3000') origin = 'http://localhost:3000'
+		if (origin === 'localhost:3111') origin = 'http://localhost:3111'
 		else origin = 'https://' + origin
 	} else {
 	}

@@ -1,69 +1,69 @@
 {
-  "short_name": "Litekart",
-  "name": "Litekart",
+  "short_name": "Simple-mobile",
+  "name": "Simple-mobile",
   "icons": [
     {
-      "src": "icons/icon-72x72.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/72.png",
       "type": "image/png",
       "sizes": "72x72",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-96x96.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/92.png",
       "type": "image/png",
-      "sizes": "96x96",
+      "sizes": "92x92",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-120x120.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/120.png",
       "type": "image/png",
       "sizes": "120x120",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-128x128.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/128.png",
       "type": "image/png",
       "sizes": "128x128",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-144x144.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/144.png",
       "type": "image/png",
       "sizes": "144x144",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-152x152.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/152.png",
       "type": "image/png",
       "sizes": "152x152",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-180x180.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/180.png",
       "type": "image/png",
       "sizes": "180x180",
       "purpose": "maskable"
     },
     {
-      "src": "icons/icon-192x192.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/196.png",
       "type": "image/png",
-      "sizes": "192x192",
+      "sizes": "196x196",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-256x256.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/256.png",
       "type": "image/png",
       "sizes": "256x256",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-384x384.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/1024.png",
       "type": "image/png",
-      "sizes": "384x384",
+      "sizes": "1024x1024",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-512x512.png",
+      "src": "AppIcons/Assets.xcassets/AppIcon.appiconset/512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
@@ -75,6 +75,6 @@
   "scope": "/",
   "theme_color": "#d62828",
   "shortcuts": [],
-  "description": "",
+  "description": "ESIM and sim cards",
   "screenshots": []
 }

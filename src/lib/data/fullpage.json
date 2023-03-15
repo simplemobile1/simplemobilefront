@@ -1,7 +1,4 @@
 {
-    "origin": "http://localhost:3000",
-    "isDesktop": true,
-    "isShowBackButton": false,
     "store": {
         "id": "6356502aca4ff28ed596cb1b",
         "address": "rishon lezion",
@@ -27,8 +24,6 @@
         "currencyCode": "USD"
     },
     "me": null,
-   
-    "url": "http://localhost:3000/",
     "currentPage": 1,
     "q": "",
     "home": {
@@ -40,7 +35,7 @@
             "page": null,
             "active": 0,
             "inactive": 0
-        }, 
+        },
         "categories": {
            "data": [],
             "count": 0,
@@ -70,8 +65,8 @@
             "inactive": 0
         },
         "groupByBanner": [
-           
-         
+
+
             {
                 "_id": {
                     "type": "slider"

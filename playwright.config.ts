@@ -2,7 +2,7 @@
 const config = {
 	webServer: {
 		command: 'npm run dev',
-		port: 3000
+		port: 3111
 	}
 }
 

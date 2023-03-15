@@ -103,7 +103,7 @@ npm run dev
 
 Thats all !
 
-Open http://localhost:3000 on chrome. Your app should be live with awesome sveltekit up and running
+Open http://localhost:3111 on chrome. Your app should be live with awesome sveltekit up and running
 
 # Configurations
 

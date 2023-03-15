@@ -6,7 +6,7 @@ import fs from 'fs'
 // const fs = require('fs')
 
 // Start Config
-const PM2_NAME = 'litekart-www:3000'
+const PM2_NAME = 'litekart-www:3111'
 const REMOTE_DIR = '/var/www/litekart/www'
 const REMOTE_HOST = '139.59.42.129'
 const REMOTE_USER = 'root'

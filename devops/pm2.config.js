@@ -1,7 +1,7 @@
 module.exports = {
 	apps: [
 		{
-			name: 'litekart-www:3000',
+			name: 'litekart-www:3111',
 			script: 'npm',
 			automation: false,
 			args: 'start',
