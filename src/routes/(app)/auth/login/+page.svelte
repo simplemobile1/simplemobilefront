@@ -89,7 +89,7 @@ async function submit() {
 		}
 
 		await cookies.set('me', me, { path: '/' })
-		// $page.data.me = me
+		 $page.data.me = me
 		await invalidateAll()
 		let r = ref || '/'
 		if (browser) goto(r)

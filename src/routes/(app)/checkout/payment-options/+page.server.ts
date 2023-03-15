@@ -17,7 +17,7 @@ export async function load({ params, parent, locals, url, request, cookies }) {
 		sid: cookies.get('sid')
 	})
 	const cart = {
-								hasPh:cartRes?.data.attributes.hasPh,
+				hasPh:cartRes?.data.attributes.hasPh,
 				cartId: cartRes?.data.id,
 				items: cartRes?.data.attributes.products.data,
 				qty: cartRes?.data.attributes.totalqty,

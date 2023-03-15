@@ -13,6 +13,7 @@ import { provider } from '$lib/config'
 import { serializeNonPOJOs } from '$lib/utils/validations'
 import type { AllOrders, Error } from '$lib/types'
 import { mapMedusajsOrder, mapMedusajsAllOrders } from '$lib/utils'
+import { posttStrapi } from '$lib/utils/strapi'
 
 export const fetchOrders = async ({ origin, storeId, server = false, sid = null }: any) => {
 	try {
@@ -158,17 +159,30 @@ export const paypalCheckout = async ({
 	address,
 	paymentMethod,
 	prescription,
-	storeId,
+	cartId,
 	origin,
+	details,
+	uId,
 	server = false,
 	sid = null
 }: any) => {
 	try {
 		let res: any = {}
 		switch (provider) {
-			case 'litekart':
+				case 'litekart':
+					const data = {"data": {			
+    							"paymentCode": details,
+								"cart":cartId,
+								"users_permissions_user":uId
+    				}
+			}
+
+			res = await	posttStrapi("/order",data, sid)
+									console.log("tt",res)
+			case 'strapi':
 				res = await post(
-					`payments/checkout-rp`,
+					`payments/checkout
+					-rp`,
 					{
 						address,
 						paymentMethod,

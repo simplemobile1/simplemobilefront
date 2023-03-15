@@ -40,7 +40,7 @@ const seoProps = {
 }
 
 export let data
-
+$: ourD = data 
 let errorMessage = 'Select a Payment Method',
 	disabled = false,
 	showPayWithBankTransfer = false,
@@ -160,12 +160,14 @@ import { loadScript } from "@paypal/paypal-js";
         },
         onApprove: function (data, actions) {
           // Capture order after payment approved
-          return actions.order.capture().then(function (details) {
+          return actions.order.capture().then(async function (details) {
 									loading = false
-				const res = await paypalCheckout({
-				address: data?.addressId,
+									console.log(details)
+			const res =	paypalCheckout({
+				address: ourD?.addressId,  
 				details: details,
-					
+				cartId: ourD.cart.cartId,
+				uId: ourD.me.id
 			})
 						toast('Payment success', 'success')
 						goto(`/payment/success?id=${details}`)
