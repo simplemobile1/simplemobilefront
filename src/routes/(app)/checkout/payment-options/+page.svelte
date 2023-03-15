@@ -40,7 +40,7 @@ const seoProps = {
 }
 
 export let data
-$: ourD = data 
+$: ourD = data
 let errorMessage = 'Select a Payment Method',
 	disabled = false,
 	showPayWithBankTransfer = false,
@@ -164,7 +164,7 @@ import { loadScript } from "@paypal/paypal-js";
 									loading = false
 									console.log(details)
 			const res =	paypalCheckout({
-				address: ourD?.addressId,  
+				address: ourD?.addressId,
 				details: details,
 				cartId: ourD.cart.cartId,
 				uId: ourD.me.id
@@ -400,10 +400,10 @@ import { loadScript } from "@paypal/paypal-js";
 			/>
 
 		</div>
-		<div class="-mt-2 md:m-0" id="paypal-button-container" />
+		<div class="-mt-2 md:m-0 " style="z-index: 1;" id="paypal-button-container" />
 
 	</div>
-	
+
 </div>
 
 {#if loading}
