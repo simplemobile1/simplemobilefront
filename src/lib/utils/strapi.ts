@@ -3,7 +3,7 @@ import datavi from './../data/store.json'
 import {
 	HTTP_ST_ENDPOINT,
 	provider,
-	
+
 } from '../config'
 
 
@@ -13,7 +13,7 @@ export function mapStrapi (dat){
 let res = dat.attributes
 res.id = dat.id
 return res
-} 
+}
 
 export async function posttStrapi(endpoint: string, data: any, ck?: any) {
 	const ep = HTTP_ST_ENDPOINT + endpoint + "?populate=*"
@@ -73,14 +73,14 @@ export async function postStrapi(endpoint: string, data: any, sid?: string) {
 }
 export async function getStrapi(endpoint: string, ck?: any) {
 	console.log("strapi!", endpoint)
-	const ck1 = cookie.parse(ck || '')
+	//const ck1 = cookie.parse(ck || '')
 	const ep = HTTP_ST_ENDPOINT + endpoint
 		console.log("strapi!", ep)
 
 	const response = await fetch(ep, {
 		method: 'GET',
 		//credentials: 'include',
-		headers: { cookie: `sid=${ck1.sid}` }
+		//headers: { cookie: `sid=${ck1.sid}` }
 	})
 	const isJson = response.headers.get('content-type')?.includes('application/json')
 

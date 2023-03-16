@@ -4,7 +4,7 @@ import { del, getAPI, post } from '$lib/utils/api'
 import { getBigCommerceApi, getBySid, getWooCommerceApi, postBySid, postt } from '$lib/utils/server'
 import { serializeNonPOJOs } from '$lib/utils/validations'
 import { error } from '@sveltejs/kit'
-import { posttStrapi } from '$lib/utils/strapi'
+import { getStrapi, posttStrapi } from '$lib/utils/strapi'
 export const fetchCartData = async ({ origin, storeId, server = false, sid = null }: any) => {
 	try {
 		let res: any = {}
@@ -43,9 +43,9 @@ export const fetchRefreshCart = async ({ origin, cartId, server = false, sid = n
 				}
 				break
 			case 'litekart':
-				
+
 					res = await getBySid(`/carts/${cartId}`, sid)
-				
+
 				break
 			case 'bigcommerce':
 				res = await getBigCommerceApi(`carts/refresh-cart`, {}, sid)
@@ -61,11 +61,18 @@ export const fetchRefreshCart = async ({ origin, cartId, server = false, sid = n
 	}
 }
 
-export const fetchMyCart = async ({ origin, storeId, server = false, sid = null }: any) => {
+export const fetchMyCart = async ({ origin, storeId,cartId, server = false, sid = null }: any) => {
 	try {
 		let res: any = {}
 		switch (provider) {
 			case 'litekart':
+				if (cartId != undefined){
+				res = await getStrapi(`/carts/${cartId}`, {}, sid)
+				}else{
+					console.log("what am i doing here?")
+				}
+				break
+			case 'strapi':
 				if (server) {
 					res = await getBySid(`carts/my?store=${storeId}`, sid)
 					// res = await getBySid(`carts/my?store=${storeId}`, sid)
@@ -102,13 +109,13 @@ export const addToCartService = async ({
 		let res: any = {}
 		switch (provider) {
 			case 'litekart':
-				
+
 				const data = {"data": {
 								"prod":	[{
 									"pid":pid,
 									"qty":qty,
 									"isPh":!prod.es
-								}],			
+								}],
     							"sid": 1,
 								"hasPh":!prod.es,
 								"totalqty":qty,
@@ -121,7 +128,6 @@ export const addToCartService = async ({
 			}
 
 			res = await	posttStrapi("/carts",data, sid)
-									console.log("tt",res)
 
 			break
 			/*case 'strapi':

@@ -5,12 +5,15 @@ export const prerender = false
 export async function load({ url, locals, cookies }) {
 	const currentPage = +url.searchParams.get('page') || 1
 	const q = url.searchParams.get('q') || ''
-	let cart
-	// let serializedCart
+		let cart: any = {}
+
+	let cartId =  locals.cartId ?? cookies.get('cartId')
+	if(cartId != undefined){	// let serializedCart
 	try {
 		const res: any = fetchMyCart({
 			storeId: locals.store?.id,
 			server: true,
+			cartId : cartId,
 			sid: cookies.get('sid')
 		})
 
@@ -37,7 +40,7 @@ export async function load({ url, locals, cookies }) {
 	} catch (e) {
 	} finally {
 	}
-
+		}
 	if (cookies) {
 		// cookies.set(serializedCart)
 	}

@@ -8,10 +8,7 @@
 
 <script>
 import { browser } from '$app/environment'
-import { GOOGLE_CLIENT_ID } from '$lib/config'
-import { googleOneTap } from './google-one-tap'
 import { goto, invalidateAll } from '$app/navigation'
-import { onMount } from 'svelte'
 import { page } from '$app/stores'
 import { post } from '$lib/utils/api'
 import Cookie from 'cookie-universal'
@@ -35,30 +32,7 @@ let loading = false
 let showPassword = false
 let type = 'password'
 let err
-/*
-onMount(() => {
-	googleOneTap(
-		{
-			client_id: GOOGLE_CLIENT_ID
-		},
-		async (res) => {
-			const onetap = await googleOneTapLoginService({ data: res, origin: $page.data.origin })
-			const me = {
-				email: onetap.email,
-				phone: onetap.phone,
-				firstName: onetap.firstName,
-				lastName: onetap.lastName,
-				avatar: onetap.avatar,
-				role: onetap.role,
-				verified: onetap.verified,
-				active: onetap.active
-			}
-			await cookies.set('me', me, { path: '/' })
-			let r = ref || '/'
-			if (browser) goto(r)
-		}
-	)
-})*/
+
 
 function togglePassword() {
 	showPassword = !showPassword
@@ -85,11 +59,11 @@ async function submit() {
 			role: res.role,
 			verified: res.verified,
 			active: res.active*/
-			tok: res.token
+			tok: res.jwt
 		}
 
 		await cookies.set('me', me, { path: '/' })
-		 $page.data.me = me
+		//$page.data.me = me
 		await invalidateAll()
 		let r = ref || '/'
 		if (browser) goto(r)
@@ -179,7 +153,7 @@ async function submit() {
 	</form>
 
 	<div class="mx-auto mb-5 flex max-w-max flex-col gap-1 text-center text-sm">
-	
+
 
 		<a
 			href="{`/auth/signup?ref=${$page.url.searchParams.get('ref') || '/'}`}"
