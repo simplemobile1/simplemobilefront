@@ -56,7 +56,6 @@ export async function postStrapi(endpoint: string, data: any, sid?: string) {
 		body: JSON.stringify(data || {}),
 		headers: {
 			'Content-Type': 'application/json',
-			cookie: `sid=${sid}`
 		}
 	})
 	const isJson = response.headers.get('content-type')?.includes('application/json')

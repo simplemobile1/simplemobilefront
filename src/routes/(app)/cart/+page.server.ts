@@ -11,6 +11,7 @@ export const load: PageServerLoad = async ({ url, request, locals, cookies }) =>
 		console.log(cartId)
 	//const cid = cookies.get('cartId')
 	//console.log(cid)
+	if(cartId != undefined){
 	try {
 		loading = true
 		const res = await fetchRefreshCart({
@@ -35,7 +36,7 @@ export const load: PageServerLoad = async ({ url, request, locals, cookies }) =>
 				unavailableItems: res?.data.attributes.unavailableItems.data,
 				formattedAmount: res?.data.attributes.formattedAmount
 			}
-	
+
 			cookies.set('cartId', cart.cartId, { path: '/' })
 			cookies.set('cartQty', cart.qty, { path: '/' })
 			 cookies.set('cart', JSON.stringify(cart), { path: '/' })
@@ -52,7 +53,7 @@ export const load: PageServerLoad = async ({ url, request, locals, cookies }) =>
 	} finally {
 		loading = false
 	}
-
+	}
 	return { loadingCart: loading, cart }
 }
 
@@ -82,7 +83,7 @@ const add: Action = async ({ request, cookies, locals }) => {
 			sid: cookies, // This is a special case to pass complete cookie
 			prod: prod
 		})
-		
+
 		if (cart) {
 			console.log("ttt",cart)
 			const cartObj = {

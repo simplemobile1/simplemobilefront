@@ -45,12 +45,6 @@ async function submit() {
 	try {
 		loading = true
 
-		const res = await loginService({
-			email: email,
-			password: password,
-			storeId: $page.data.store?.id,
-			origin: $page.data.origin
-		})
 
 		const me = {
 			email: res.email,
@@ -73,6 +67,9 @@ async function submit() {
 		loading = false
 	}
 }
+  /** @type {import('./$types').ActionData} */
+
+export let form;
 </script>
 
 <SEO {...seoProps} />
@@ -85,14 +82,15 @@ async function submit() {
 
 	<Error err="{err}" />
 
-	<form class="mb-5 flex flex-col gap-5" on:submit|preventDefault="{submit}">
-		<TextboxFloating type="email" label="Email" class="w-full" required bind:value="{email}" />
-
+	<form class="mb-5 flex flex-col gap-5" method="POST"  action="?/login">
+		<TextboxFloating type="email" name="email" label="Email" class="w-full" required bind:value="{email}" />
+		{#if form?.missing}<p class="error">The email field is required</p>{/if}
 		<div class="relative">
 			<TextboxFloating
 				type="{type}"
 				label="Password"
 				class="w-full"
+				name="password"
 				required
 				bind:value="{password}"
 			/>
