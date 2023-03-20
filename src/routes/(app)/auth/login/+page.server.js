@@ -51,7 +51,7 @@ export const actions = {
 		} catch (e) {
 			let error1 = e
 			console.log(error1)
-			return fail(400, { error1 })
+			return fail(400)
 		}
 		return { success: true }
 	}
