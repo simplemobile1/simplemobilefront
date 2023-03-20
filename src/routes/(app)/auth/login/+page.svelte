@@ -25,7 +25,7 @@ const seoProps = {
 	description: 'Email Login'
 }
 
-let ref = $page?.url?.searchParams.get('ref')
+let ref = $page?.url?.searchParams.get('ref') || "/"
 let email
 let password
 let loading = false
@@ -72,7 +72,7 @@ export let form;
 
 	<Error err="{err}" />
 
-	<form class="mb-5 flex flex-col gap-5" method="POST"  action="?/login">
+	<form class="mb-5 flex flex-col gap-5" method="POST"  action="?/login&ref={ref}">
 		<TextboxFloating type="email" name="email" label="Email" class="w-full" required bind:value="{email}" />
 		{#if form?.missing}<p class="error">The email field is required</p>{/if}
 		<div class="relative">

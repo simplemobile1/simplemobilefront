@@ -3,11 +3,14 @@ import { HTTP_ST_ENDPOINT } from '$lib/config'
 import { fail, redirect } from '@sveltejs/kit'
 import { page } from '$app/stores'
 
-let ref = page?.url?.searchParams.get('ref')
-
 let loginError
 export const actions = {
 	login: async ({ cookies, request }) => {
+		console.log(request)
+
+		let ref = new URL(request.url) //
+		const x = ref.searchParams.get('ref')
+
 		const data = await request.formData()
 		console.log(data.get('email'))
 		const email = data.get('email')
@@ -58,12 +61,12 @@ export const actions = {
 			}
 
 			cookies.set('me', JSON.stringify(me), { path: '/' })
-			throw redirect(303, ref || '/')
+			console.log(ref, x)
 		} catch (e) {
 			let error1 = e
 			console.log(error1)
 			return fail(400)
 		}
-		return { success: true }
+		throw redirect(303, x || '/')
 	}
 }
