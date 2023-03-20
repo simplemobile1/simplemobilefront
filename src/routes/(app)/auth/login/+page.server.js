@@ -46,7 +46,18 @@ export const actions = {
 
 			cookies.set('sessiontc', user.jwt)
 			console.log(cookies.get('sessiontc'))
-			//me
+			const me = {
+				email: user.user.email,
+				firstName: user.user.username,
+				/*avatar: res.avatar,
+			role: res.role,
+			verified: res.verified,
+			active: res.active*/
+				id: user.user.id,
+				tok: user.jwt
+			}
+
+			cookies.set('me', JSON.stringify(me), { path: '/' })
 			throw redirect(303, ref || '/')
 		} catch (e) {
 			let error1 = e

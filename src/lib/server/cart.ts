@@ -12,6 +12,7 @@ export const fetchCart = async (event: RequestEvent) => {
 
 		if (cartQty) event.locals.cartQty = +cartQty
 		const sid = event.cookies.get('sid')
+		if (cartId != undefined){
 		const cartRes = await getBySid(`/carts/${cartId}`, sid)
 		const cart = {
 			hasPh:cartRes?.data.attributes.hasPh,
@@ -30,6 +31,14 @@ export const fetchCart = async (event: RequestEvent) => {
 				formattedAmount: cartRes?.data.attributes.formattedAmount
 			}
 		return cart
+
+		}else{
+		let cart = {}
+		return cart
+
+		}
+
+
 	} catch (e) {
 		return null
 	}

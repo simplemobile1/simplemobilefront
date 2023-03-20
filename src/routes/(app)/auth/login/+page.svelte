@@ -46,17 +46,7 @@ async function submit() {
 		loading = true
 
 
-		const me = {
-			email: res.email,
-			firstName: res?.username,
-			/*avatar: res.avatar,
-			role: res.role,
-			verified: res.verified,
-			active: res.active*/
-			tok: res.jwt
-		}
 
-		await cookies.set('me', me, { path: '/' })
 		//$page.data.me = me
 		await invalidateAll()
 		let r = ref || '/'
