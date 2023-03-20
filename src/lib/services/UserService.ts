@@ -25,7 +25,7 @@ export const fetchMeData = async ({ origin, storeId, server = false, sid = null 
 						email: email,
 						password: password
 					}
-				)				
+				)
 				break
 				case 'strapi':
 				if (server) {
@@ -199,7 +199,7 @@ export const forgotPasswordService = async ({
 					},
 					origin
 				)
-				break	
+				break
 			case 'bigcommerce':
 				res = await postBigCommerceApi(`signup`, {})
 				break
@@ -222,6 +222,7 @@ export const changePasswordService = async ({
 	server = false,
 	sid = null
 }: any) => {
+
 	try {
 		let res: any = {}
 		switch (provider) {

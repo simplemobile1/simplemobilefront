@@ -7,6 +7,7 @@ export async function load({ params, parent, request, locals, cookies }) {
 			storeId: locals.store?.id,
 			server: true,
 			sid: cookies.get('sid')
+			//uid token
 		})
 		if (res) {
 			return res
