@@ -25,14 +25,14 @@ const seoProps = {
 	description: 'Email Login'
 }
 
-let ref = $page?.url?.searchParams.get('ref') || "/"
+let ref = $page?.url?.searchParams.get('ref') || '/'
 let email
 let password
+
 let loading = false
 let showPassword = false
 let type = 'password'
 let err
-
 
 function togglePassword() {
 	showPassword = !showPassword
@@ -45,8 +45,6 @@ async function submit() {
 	try {
 		loading = true
 
-
-
 		//$page.data.me = me
 		await invalidateAll()
 		let r = ref || '/'
@@ -57,23 +55,28 @@ async function submit() {
 		loading = false
 	}
 }
-  /** @type {import('./$types').ActionData} */
+/** @type {import('./$types').ActionData} */
 
-export let form;
+export let form
 </script>
 
 <SEO {...seoProps} />
 
 <div
 	class="frosted container mx-auto flex w-full max-w-sm flex-col rounded-2xl border bg-cover bg-center bg-no-repeat p-10 shadow-2xl"
-	style="background-image: url('/login/bg-lighter.svg');"
->
+	style="background-image: url('/login/bg-lighter.svg');">
 	<h1 class="mb-8 w-full text-center text-2xl font-bold text-primary-500">Login</h1>
 
 	<Error err="{err}" />
 
-	<form class="mb-5 flex flex-col gap-5" method="POST"  action="?/login&ref={ref}">
-		<TextboxFloating type="email" name="email" label="Email" class="w-full" required bind:value="{email}" />
+	<form class="mb-5 flex flex-col gap-5" method="POST" action="?/login&ref={ref}">
+		<TextboxFloating
+			type="email"
+			name="email"
+			label="Email"
+			class="w-full"
+			required
+			bind:value="{email}" />
 		{#if form?.missing}<p class="error">The email field is required</p>{/if}
 		<div class="relative">
 			<TextboxFloating
@@ -82,13 +85,11 @@ export let form;
 				class="w-full"
 				name="password"
 				required
-				bind:value="{password}"
-			/>
+				bind:value="{password}" />
 
 			<button
 				class="absolute inset-y-0 right-2 flex cursor-pointer items-end justify-center pb-2"
-				on:click="{togglePassword}"
-			>
+				on:click="{togglePassword}">
 				{#if showPassword}
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -96,8 +97,7 @@ export let form;
 						viewBox="0 0 24 24"
 						stroke-width="1.5"
 						stroke="currentColor"
-						class="h-5 w-5"
-					>
+						class="h-5 w-5">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -111,8 +111,7 @@ export let form;
 						viewBox="0 0 24 24"
 						stroke-width="1.5"
 						stroke="currentColor"
-						class="h-5 w-5"
-					>
+						class="h-5 w-5">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -131,8 +130,7 @@ export let form;
 			<a
 				href="{`/auth/forgot-password?ref=${$page.url.searchParams.get('ref') || '/'}`}"
 				aria-label="Click to route terms & conditions"
-				class="whitespace-nowrap text-xs text-gray-500 hover:underline"
-			>
+				class="whitespace-nowrap text-xs text-gray-500 hover:underline">
 				Forgot Password
 			</a>
 		</div>
@@ -141,13 +139,10 @@ export let form;
 	</form>
 
 	<div class="mx-auto mb-5 flex max-w-max flex-col gap-1 text-center text-sm">
-
-
 		<a
 			href="{`/auth/signup?ref=${$page.url.searchParams.get('ref') || '/'}`}"
 			aria-label="Click to login with email"
-			class="whitespace-nowrap text-primary-500 hover:text-primary-700 hover:underline"
-		>
+			class="whitespace-nowrap text-primary-500 hover:text-primary-700 hover:underline">
 			Signup
 		</a>
 		<!---
@@ -167,8 +162,7 @@ export let form;
 			aria-label="Click to route terms & conditions"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="whitespace-nowrap text-primary-500 hover:text-primary-700 hover:underline"
-		>
+			class="whitespace-nowrap text-primary-500 hover:text-primary-700 hover:underline">
 			<b>Terms & Conditions</b>
 		</a>
 	</p>
