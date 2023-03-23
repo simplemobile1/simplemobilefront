@@ -14,13 +14,12 @@ export const actions = {
 		const data = await request.formData()
 		console.log(data.get('email'))
 		const email = data.get('email')
-		if (!email) {
+		const password = data.get('password')
+
+		if (!email || !password) {
 			return fail(400, { email, missing: true })
 		}
-		const password = data.get('password')
-		if (!password) {
-			return fail(400, { password, missing: true })
-		}
+
 		let user
 		const parseJSON = (resp) => (resp.json ? resp.json() : resp)
 		const checkStatus = (resp) => {

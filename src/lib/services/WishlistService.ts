@@ -2,14 +2,9 @@ import { provider } from '$lib/config'
 import type { Error } from '$lib/types'
 import { getAPI, post } from '$lib/utils/api'
 import {
-	postBigCommerceApi,
-	postWooCommerceApi,
-	getBigCommerceApi,
 	getBySid,
-	getWooCommerceApi,
 	postBySid
 } from '$lib/utils/server'
-import { serializeNonPOJOs } from '$lib/utils/validations'
 import { error } from '@sveltejs/kit'
 
 export const fetchWishlist = async ({
@@ -36,12 +31,6 @@ export const fetchWishlist = async ({
 						origin
 					)
 				}
-				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`wishlists/my`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`wishlists/my`, {}, sid)
 				break
 		}
 		return res?.data || []
@@ -73,12 +62,6 @@ export const checkhWishlist = async ({
 						origin
 					)
 				}
-				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`wishlists/check`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`wishlists/check`, {}, sid)
 				break
 		}
 		return res
@@ -112,12 +95,6 @@ export const toggleWishlistService = async ({
 						origin
 					)
 				}
-				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`wishlists/toggle`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`wishlists/toggle`, {})
 				break
 		}
 		return res

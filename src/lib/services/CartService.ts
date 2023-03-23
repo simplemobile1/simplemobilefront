@@ -1,8 +1,7 @@
 import { provider } from '$lib/config'
 import type { Error } from '$lib/types'
 import { del, getAPI, post } from '$lib/utils/api'
-import { getBigCommerceApi, getBySid, getWooCommerceApi, postBySid, postt } from '$lib/utils/server'
-import { serializeNonPOJOs } from '$lib/utils/validations'
+import {  getBySid, postBySid, postt } from '$lib/utils/server'
 import { error } from '@sveltejs/kit'
 import { getStrapi, posttStrapi } from '$lib/utils/strapi'
 export const fetchCartData = async ({ origin, storeId, server = false, sid = null }: any) => {
@@ -16,12 +15,7 @@ export const fetchCartData = async ({ origin, storeId, server = false, sid = nul
 					res = await getAPI(`cart?store=${storeId}`, origin)
 				}
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`cart`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`cart`, {}, sid)
-				break
+
 		}
 		return res || {}
 	} catch (err) {
@@ -47,12 +41,7 @@ export const fetchRefreshCart = async ({ origin, cartId, server = false, sid = n
 					res = await getBySid(`/carts/${cartId}`, sid)
 
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`carts/refresh-cart`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`carts/refresh-cart`, {}, sid)
-				break
+
 		}
 		return res || {}
 	} catch (err) {
@@ -80,12 +69,8 @@ export const fetchMyCart = async ({ origin, storeId,cartId, server = false, sid 
 					res = await getAPI(`carts/my?store=${storeId}`, origin)
 				}
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`carts/my`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`carts/my`, {}, sid)
-				break
+
+
 		}
 		return res || {}
 	} catch (err) {

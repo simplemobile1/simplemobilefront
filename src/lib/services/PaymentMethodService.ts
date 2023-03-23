@@ -1,7 +1,7 @@
 import { provider } from '$lib/config'
 import type { Error } from '$lib/types'
 import { getAPI } from '$lib/utils/api'
-import { getBigCommerceApi, getBySid, getWooCommerceApi } from '$lib/utils/server'
+import {  getBySid } from '$lib/utils/server'
 import { serializeNonPOJOs } from '$lib/utils/validations'
 import { error } from '@sveltejs/kit'
 
@@ -16,12 +16,7 @@ export const fetchPaymentMethods = async ({ origin, storeId, server = false, sid
 					res = await getAPI(`payment-methods?store=${storeId}&active=true`, origin)
 				}
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`payment-methods`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`payment-methods`, {}, sid)
-				break
+
 		}
 		return res.data || []
 	} catch (e) {

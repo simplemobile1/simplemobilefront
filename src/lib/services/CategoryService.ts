@@ -1,8 +1,7 @@
 import { provider } from '$lib/config'
 import type { Error } from '$lib/types'
 import { getAPI } from '$lib/utils/api'
-import { getBigCommerceApi, getBySid, getWooCommerceApi } from '$lib/utils/server'
-import { serializeNonPOJOs } from '$lib/utils/validations'
+import {  getBySid } from '$lib/utils/server'
 import { error } from '@sveltejs/kit'
 
 export const fetchFooterCategories = async ({
@@ -28,12 +27,7 @@ export const fetchFooterCategories = async ({
 				}
 				// must return link:string, slug:string(optional) name:string, new:boolean
 				break
-			case 'bigcommerce':
-				data = await getBigCommerceApi(`categories`, {}, sid)
-				break
-			case 'woocommerce':
-				data = await getWooCommerceApi(`categories`, {}, sid)
-				break
+
 		}
 		return data || []
 	} catch (e) {
@@ -52,12 +46,7 @@ export const fetchCategory = async ({ origin, id, server = false, sid = null }: 
 					res = await getAPI(`category/${id}`, origin)
 				}
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`categories`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`categories`, {}, sid)
-				break
+
 		}
 		return res || {}
 	} catch (e) {
@@ -90,12 +79,7 @@ export const fetchAllCategories = async ({
 				pageSize = res.pageSize
 				currentPage = res.currentPage
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`categories`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`categories`, {}, sid)
-				break
+
 		}
 		return { data, pageSize, currentPage }
 	} catch (e) {
@@ -135,12 +119,7 @@ export const fetchAllProductsOfCategories = async ({
 				err = !products ? 'No result Not Found' : null
 				// must return link:string, slug:string(optional) name:string, new:boolean
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`categories`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`categories`, {}, sid)
-				break
+
 		}
 		return { products, productsCount, currentPage, facets, err }
 	} catch (e) {
@@ -160,12 +139,7 @@ export const fetchMegamenuData = async ({ origin, storeId, server = false, sid =
 				}
 				// must return link:string, slug:string(optional) name:string, new:boolean
 				break
-			case 'bigcommerce':
-				data = await getBigCommerceApi(`banners`, {}, sid)
-				break
-			case 'woocommerce':
-				data = await getWooCommerceApi(`banners`, {}, sid)
-				break
+
 		}
 		return data || []
 	} catch (e) {

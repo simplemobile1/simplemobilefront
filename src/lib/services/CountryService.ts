@@ -1,8 +1,7 @@
 import { provider } from '$lib/config'
 import type { Error } from '$lib/types'
 import { getAPI } from '$lib/utils/api'
-import { getBigCommerceApi, getBySid, getWooCommerceApi } from '$lib/utils/server'
-import { serializeNonPOJOs } from '$lib/utils/validations'
+import {  getBySid } from '$lib/utils/server'
 import { error } from '@sveltejs/kit'
 
 export const fetchCountries = async ({ origin, storeId, server = false, sid = null }: any) => {
@@ -16,12 +15,7 @@ export const fetchCountries = async ({ origin, storeId, server = false, sid = nu
 					res = await getAPI(`countries?limit=300&page=0&store=${storeId}`, origin)
 				}
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`countries`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`countries`, {}, sid)
-				break
+
 		}
 		return res?.data || []
 	} catch (e) {
@@ -52,12 +46,7 @@ export const fetchStates = async ({
 					)
 				}
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`states`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`states`, {}, sid)
-				break
+
 		}
 		return res?.data || []
 	} catch (e) {

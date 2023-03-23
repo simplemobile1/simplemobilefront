@@ -7,10 +7,6 @@ let loginError
 export const actions = {
 	sing: async ({ cookies, request }) => {
 		console.log(request)
-``,
-					{
-						
-					}
 		let ref = new URL(request.url) //
 		const x = ref.searchParams.get('ref')
 
@@ -24,8 +20,8 @@ export const actions = {
 		if (!password) {
 			return fail(400, { password, missing: true })
 		}
-		const firstName = data.get('firstName') || ""
-		const lastName = data.get('lastName') || ""
+		const firstName = data.get('firstName') || ''
+		const lastName = data.get('lastName') || ''
 		if (!lastName && !firstName) {
 			return fail(400, { email, missing: true })
 		}
@@ -46,9 +42,9 @@ export const actions = {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					username: firstName + " " + lastName,
-						email: email,
-						password: password
+					username: firstName + ' ' + lastName,
+					email: email,
+					password: password
 				})
 			})
 				.then(checkStatus)

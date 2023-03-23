@@ -2,13 +2,9 @@ import { provider } from '$lib/config'
 import type { Error } from '$lib/types'
 import { getAPI, post } from '$lib/utils/api'
 import {
-	getBigCommerceApi,
 	getBySid,
-	getWooCommerceApi,
-	postBigCommerceApi,
-	postWooCommerceApi
+
 } from '$lib/utils/server'
-import { serializeNonPOJOs } from '$lib/utils/validations'
 import { error } from '@sveltejs/kit'
 
 export const fetchAddresses = async ({ origin, storeId, server = false, sid = null }: any) => {
@@ -25,14 +21,6 @@ export const fetchAddresses = async ({ origin, storeId, server = false, sid = nu
 				}
 				selectedAddress = res?.data[0]?._id
 				myAddresses = res.data || []
-				break
-			case 'bigcommerce':
-				myAddresses = (await getBigCommerceApi(`addresses/my`, {}, sid)).data
-				selectedAddress = myAddresses[0]?._id
-				break
-			case 'woocommerce':
-				myAddresses = (await getWooCommerceApi(`addresses/my`, {}, sid))?.data
-				selectedAddress = myAddresses[0]?._id
 				break
 		}
 		return { myAddresses: { data: myAddresses }, selectedAddress, count: res.count }
@@ -51,12 +39,6 @@ export const fetchAddress = async ({ origin, storeId, server = false, sid = null
 				} else {
 					res = await getAPI(`addresses/${id}`, origin)
 				}
-				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`addresses/${id}`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`addresses/${id}`, {}, sid)
 				break
 		}
 		return res || {}
@@ -104,12 +86,6 @@ export const saveAddress = async ({
 					},
 					origin
 				)
-				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`address`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`address`, {})
 				break
 		}
 		return res

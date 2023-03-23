@@ -1,5 +1,4 @@
 import { provider } from '$lib/config'
-import { postBigCommerceApi, postWooCommerceApi } from '$lib/utils/server'
 import { error } from '@sveltejs/kit'
 import type { Error } from '$lib/types'
 import { post } from '$lib/utils/api'
@@ -32,12 +31,7 @@ export const submitContactUsForm = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`contact-us`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`contact-us`, {})
-				break
+
 		}
 		return res
 	} catch (err) {
@@ -78,12 +72,7 @@ export const bulkOrderEnquiry = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`bulk-order-enquiry`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`bulk-order-enquiry`, {})
-				break
+
 		}
 		return res
 	} catch (e) {

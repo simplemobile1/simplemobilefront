@@ -2,13 +2,9 @@ import { provider } from '$lib/config'
 import type { Error } from '$lib/types'
 import { getAPI, post } from '$lib/utils/api'
 import {
-	getBigCommerceApi,
 	getBySid,
-	getWooCommerceApi,
-	postBigCommerceApi,
-	postWooCommerceApi
+
 } from '$lib/utils/server'
-import { serializeNonPOJOs } from '$lib/utils/validations'
 import { error } from '@sveltejs/kit'
 
 export const fetchReviews = async ({
@@ -41,12 +37,7 @@ export const fetchReviews = async ({
 					)
 				}
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`reviews/${pid}`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`reviews/${pid}`, {}, sid)
-				break
+
 		}
 		return {
 			data: res.data || [],
@@ -77,12 +68,7 @@ export const fetchProductReviews = async ({
 					res = await getAPI(`reviews/product-reviews?pid=${pid}&store=${storeId}`, origin)
 				}
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`reviews/product-reviews?pid=${pid}`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`reviews/product-reviews?pid=${pid}`, {}, sid)
-				break
+
 		}
 		return res?.data || []
 	} catch (e) {
@@ -116,12 +102,7 @@ export const saveReview = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`reviews`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`reviews`, {})
-				break
+
 		}
 		return res
 	} catch (e) {

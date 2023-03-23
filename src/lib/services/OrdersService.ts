@@ -1,16 +1,12 @@
 import { error } from '@sveltejs/kit'
 import { getAPI, post } from '$lib/utils/api'
 import {
-	getBigCommerceApi,
 	getBySid,
-	getWooCommerceApi,
-	postBigCommerceApi,
+
 	postBySid,
-	postWooCommerceApi,
-	getMedusajsApi
+
 } from '$lib/utils/server'
 import { provider } from '$lib/config'
-import { serializeNonPOJOs } from '$lib/utils/validations'
 import type { AllOrders, Error } from '$lib/types'
 import { mapMedusajsOrder, mapMedusajsAllOrders } from '$lib/utils'
 import { posttStrapi } from '$lib/utils/strapi'
@@ -26,16 +22,7 @@ export const fetchOrders = async ({ origin, storeId, server = false, sid = null 
 					res = await getAPI(`orders/my?store=${storeId}&active=true`, origin)
 				}
 				break
-			case 'medusajs':
-				const med = (await getMedusajsApi(`products`, {}, sid)).product
-				res = mapMedusajsAllOrders(med)
-				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`orders/my`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`orders/my`, {}, sid)
-				break
+
 		}
 
 		return {
@@ -61,16 +48,7 @@ export const fetchOrder = async ({ origin, storeId, id, server = false, sid = nu
 					res = await getAPI(`orders/${id}?store=${storeId}`, origin)
 				}
 				break
-			case 'medusajs':
-				const med = (await getMedusajsApi(`products`, {}, sid)).product
-				res = mapMedusajsOrder(med)
-				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`orders/${id}`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`orders/${id}`, {}, sid)
-				break
+
 		}
 		return res || {}
 	} catch (e) {
@@ -89,12 +67,7 @@ export const fetchTrackOrder = async ({ origin, storeId, id, server = false, sid
 					res = await getAPI(`order-tracking?order=${id}&store=${storeId}`, origin)
 				}
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`order-tracking`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`order-tracking`, {}, sid)
-				break
+
 		}
 		return res.data || []
 	} catch (e) {
@@ -115,9 +88,7 @@ export const paySuccessPageHit = async ({
 	try {
 		let res: any = {}
 		switch (provider) {
-			case 'litekart':
-				res = await postBigCommerceApi(`orders/pay-sucess-page-hit`, {}, sid)
-				break
+
 			case 'strapi':
 				if (server) {
 					res = await postBySid(
@@ -143,12 +114,7 @@ export const paySuccessPageHit = async ({
 					)
 				}
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`orders/pay-sucess-page-hit`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`orders/pay-sucess-page-hit`, {}, sid)
-				break
+
 		}
 		return res || {}
 	} catch (e) {
@@ -170,7 +136,7 @@ export const paypalCheckout = async ({
 		let res: any = {}
 		switch (provider) {
 				case 'litekart':
-					const data = {"data": {			
+					const data = {"data": {
     							"paymentCode": details,
 								"cart":cartId,
 								"users_permissions_user":uId
@@ -192,12 +158,7 @@ export const paypalCheckout = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`payments/checkout-rp`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`payments/checkout-rp`, {}, sid)
-				break
+
 		}
 		return res.data || []
 	} catch (e) {
@@ -228,12 +189,7 @@ export const codCheckout = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`orders/checkout/cod`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`orders/checkout/cod`, {}, sid)
-				break
+
 		}
 		return res || {}
 	} catch (e) {
@@ -264,12 +220,7 @@ export const cashfreeCheckout = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`payments/checkout-cf`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`payments/checkout-cf`, {}, sid)
-				break
+
 		}
 		return res || {}
 	} catch (e) {
@@ -301,12 +252,7 @@ export const razorpayCheckout = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`payments/checkout-rp`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`payments/checkout-rp`, {}, sid)
-				break
+
 		}
 		return res.data || []
 	} catch (e) {
@@ -336,12 +282,7 @@ export const razorpayCapture = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`payments/capture-rp`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`payments/capture-rp`, {}, sid)
-				break
+
 		}
 		return res.data || []
 	} catch (e) {
@@ -371,12 +312,7 @@ export const stripeCheckoutService = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`stripe`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`stripe`, {}, sid)
-				break
+
 		}
 		return res.data || []
 	} catch (e) {

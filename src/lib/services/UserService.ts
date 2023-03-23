@@ -2,14 +2,10 @@ import { provider } from '$lib/config'
 import type { Error } from '$lib/types'
 import { del, getAPI, post, put } from '$lib/utils/api'
 import {
-	getBigCommerceApi,
 	getBySid,
-	getWooCommerceApi,
-	postBigCommerceApi,
-	postWooCommerceApi
+
 } from '$lib/utils/server'
 import { postStrapi } from '$lib/utils/strapi'
-import { serializeNonPOJOs } from '$lib/utils/validations'
 import { error } from '@sveltejs/kit'
 
 export const fetchMeData = async ({ origin, storeId, server = false, sid = null ,userId}: any) => {
@@ -33,12 +29,6 @@ export const fetchMeData = async ({ origin, storeId, server = false, sid = null 
 				} else {
 					res = await getAPI(`users/me?store=${storeId}`, origin)
 				}
-				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`users/me`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`users/me`, {}, sid)
 				break
 		}
 		return res || {}
@@ -88,12 +78,6 @@ export const signupService = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`signup`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`signup`, {})
-				break
 		}
 		return res
 	} catch (e) {
@@ -113,12 +97,6 @@ export const googleOneTapLoginService = async ({
 		switch (provider) {
 			case 'litekart':
 				res = await post(`auth/google/onetap`, data, origin)
-				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`auth/google/onetap`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`auth/google/onetap`, {})
 				break
 		}
 		return res
@@ -158,12 +136,7 @@ export const loginService = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`signup`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`signup`, {})
-				break
+
 		}
 		return res
 	} catch (e) {
@@ -200,12 +173,7 @@ export const forgotPasswordService = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`signup`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`signup`, {})
-				break
+
 		}
 		return res
 	} catch (e) {
@@ -248,12 +216,7 @@ export const changePasswordService = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`signup`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`signup`, {})
-				break
+
 		}
 		return res
 	} catch (e) {
@@ -286,12 +249,7 @@ export const getOtpService = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`signup`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`signup`, {})
-				break
+
 		}
 		return res
 	} catch (e) {
@@ -321,12 +279,7 @@ export const verifyOtpService = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`signup`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`signup`, {})
-				break
+
 		}
 		return res
 	} catch (e) {
@@ -347,12 +300,7 @@ export const logoutService = async ({ storeId, origin, server = false, sid = nul
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`signup`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`signup`, {})
-				break
+
 		}
 		return res
 	} catch (e) {
@@ -373,12 +321,7 @@ export const updateProfileService = async ({
 			case 'litekart':
 				res = await put(`users/update-profile`, e, origin)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`users/update-profile`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`users/update-profile`, {})
-				break
+
 		}
 		return res
 	} catch (e) {

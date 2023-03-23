@@ -3,20 +3,11 @@ import { getAPI } from '$lib/utils/api'
 import { getStrapi } from '$lib/utils/strapi'
 import { mapStrapi } from '$lib/utils/strapi'
 import {
-	getBigCommerceApi,
 	getBySid,
-	getMedusajsApi,
-	getWooCommerceApi,
-	postMedusajsApi
+
 } from '$lib/utils/server'
-import {
-	mapBigcommerceProducts,
-	mapMedusajsProduct,
-	mapMedusajsAllProducts,
-	mapWoocommerceProducts
-} from '$lib/utils'
+
 import { provider } from '$lib/config'
-import { serializeNonPOJOs } from '$lib/utils/validations'
 import type { AllProducts, Error, Product } from '$lib/types'
 
 // Search product
@@ -57,19 +48,7 @@ export const searchProducts = async ({
 				pageSize = res?.pageSize
 				err = !res?.estimatedTotalHits ? 'No result Not Found' : null
 				break
-			case 'medusajs':
-				res = await postMedusajsApi(`products/search?q=${searchData}`, {}, sid)
-				products = res?.products
-				count = res?.count
-				facets = res?.facets || []
-				pageSize = res?.pageSize || 25
-				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`products?${query}`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`products?${query}`, {}, sid)
-				break
+
 		}
 		return { products, count, facets, pageSize, err }
 	} catch (e) {
@@ -90,16 +69,7 @@ export const fetchProducts = async ({ origin, slug, id, server = false, sid = nu
 					res = await getAPI(`products?store=${storeId}`, origin)
 				}
 				break
-			case 'medusajs':
-				const med = (await getMedusajsApi(`products`, {}, sid)).product
-				res = mapMedusajsAllProducts(med)
-				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`products`, {}, sid)
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`products`, {}, sid)
-				break
+
 		}
 
 		return res?.data || []
@@ -122,20 +92,7 @@ export const fetchProduct = async ({ origin, slug, id, server = false, sid = nul
 					res = await getAPI(`products/${slug}`, origin)
 				}
 				break*/
-			case 'medusajs':
-				const med = (await getMedusajsApi(`products/${id}`, {}, sid)).product
-				res = mapMedusajsProduct(med)
-				break
-			case 'bigcommerce':
-				const bi = (await getBigCommerceApi(`products/${id}`, {}, sid)).data
-				const images = (await getBigCommerceApi(`products/${id}/images`, {}, sid)).data
-				bi.images = images
-				res = mapBigcommerceProducts(bi)
-				break
-			case 'woocommerce':
-				const wo = (await getWooCommerceApi(`products/${id}`, {}, sid)).data
-				res = mapWoocommerceProducts(wo)
-				break
+
 			case 'litekart':
 				const st = (await getStrapi(`/products/${slug}?populate=*`)).data
 				console.log("pt:",st)
@@ -189,20 +146,7 @@ export const fetchProductsOfCategory = async ({
 				category = res?.category
 				err = !res?.estimatedTotalHits ? 'No result Not Found' : null
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(`products?categories=${categorySlug}`, {}, sid)
-				count = res?.count
-				facets = res?.facets
-				pageSize = res?.pageSize
-				category = res?.category
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(`products?categories=${categorySlug}`, {}, sid)
-				count = res?.count
-				facets = res?.facets
-				pageSize = res?.pageSize
-				category = res?.category
-				break
+
 		}
 		return { products, count, facets, pageSize, category, err }
 	} catch (e) {
@@ -243,30 +187,7 @@ export const fetchNextPageProducts = async ({
 					return p1
 				})
 				break
-			case 'bigcommerce':
-				res = await getBigCommerceApi(
-					`products?categories=${categorySlug}&page=${nextPage}&${searchParams}`,
-					{},
-					sid
-				)
-				nextPageData = res?.data?.map((p) => {
-					const p1 = { ...p._source }
-					p1.id = p._id
-					return p1
-				})
-				break
-			case 'woocommerce':
-				res = await getWooCommerceApi(
-					`products?categories=${categorySlug}&page=${nextPage}&${searchParams}`,
-					{},
-					sid
-				)
-				nextPageData = res?.data?.map((p) => {
-					const p1 = { ...p._source }
-					p1.id = p._id
-					return p1
-				})
-				break
+
 		}
 		return {
 			nextPageData: nextPageData || [],
@@ -310,12 +231,7 @@ export const fetchRelatedProducts = async ({
 					return p._id !== pid
 				})
 				break
-			case 'bigcommerce':
-				relatedProducts = await getBigCommerceApi(`products?categories=${categorySlug}`, {}, sid)
-				break
-			case 'woocommerce':
-				relatedProducts = await getWooCommerceApi(`products?categories=${categorySlug}`, {}, sid)
-				break
+
 		}
 		return relatedProducts || []
 	} catch (e) {

@@ -1,5 +1,4 @@
 import { provider } from '$lib/config'
-import { postBigCommerceApi, postWooCommerceApi } from '$lib/utils/server'
 import { error } from '@sveltejs/kit'
 import type { Error } from '$lib/types'
 import { post } from '$lib/utils/api'
@@ -27,12 +26,7 @@ export const savePopularSearch = async ({
 					origin
 				)
 				break
-			case 'bigcommerce':
-				res = await postBigCommerceApi(`popular-search`, {})
-				break
-			case 'woocommerce':
-				res = await postWooCommerceApi(`popular-search`, {})
-				break
+
 		}
 		return res
 	} catch (e) {
